@@ -1,0 +1,39 @@
+{
+  "pluginManage": {
+    "plugins": {
+      "card": {
+        "summary": "卡片管理",
+        "description": "管理仪表盘与内容卡片，支持新增、编辑、排序。",
+        "sidebarMenuName": "卡片"
+      }
+    }
+  },
+  "cardManagement": {
+    "title": "卡片管理",
+    "description": "管理仪表盘与内容卡片，支持新增、编辑、排序。",
+    "addCard": "安装卡片",
+    "loading": "加载中…",
+    "emptyHint": "暂无卡片，点击下方按钮添加。",
+    "noDescription": "无描述",
+    "searchPlaceholder": "搜索卡片…",
+    "moreOptions": "更多操作",
+    "edit": "编辑",
+    "delete": "删除",
+    "showRemoteList": "展示远程",
+    "tabLocal": "已安装",
+    "tabRemote": "远程",
+    "remoteEmptyHint": "暂无远程卡片。",
+    "installDialogTitle": "安装本地卡片包",
+    "packageFileLabel": "卡片包文件",
+    "packageFileHint": "请选择 .zip 格式的卡片包文件。",
+    "cancel": "取消",
+    "install": "安装",
+    "installing": "安装中…",
+    "toastSelectPackage": "请选择卡片包文件",
+    "toastInstallSuccess": "安装成功",
+    "toastInstallFailed": "安装失败",
+    "testCardTitle": "测试卡片 {n}",
+    "remoteCardTitle": "远程卡片 {n}",
+    "testCardDesc": "这是一张测试卡片。"
+  }
+}

@@ -2,7 +2,25 @@
 import { useColorMode } from '@vueuse/core'
 import { Moon, Sun, SunMoon } from 'lucide-vue-next'
 
+import { saveUserPreferencesApi } from '@/services/api/core/user.api'
+import { useAuthStore } from '@/stores/auth'
+
 const mode = useColorMode()
+const authStore = useAuthStore()
+
+async function setTheme(value: 'light' | 'dark' | 'auto') {
+  mode.value = value
+  if (authStore.isLogin) {
+    try {
+      await saveUserPreferencesApi({ theme: value })
+      if (authStore.userPreferences)
+        authStore.userPreferences = { ...authStore.userPreferences, theme: value }
+    }
+    catch {
+      // 静默失败，本地已切换
+    }
+  }
+}
 </script>
 
 <template>
@@ -15,15 +33,15 @@ const mode = useColorMode()
       </UiButton>
     </UiDropdownMenuTrigger>
     <UiDropdownMenuContent align="end">
-      <UiDropdownMenuItem @click="mode = 'light'">
+      <UiDropdownMenuItem @click="setTheme('light')">
         <Sun />
         Light
       </UiDropdownMenuItem>
-      <UiDropdownMenuItem @click="mode = 'dark'">
+      <UiDropdownMenuItem @click="setTheme('dark')">
         <Moon />
         Dark
       </UiDropdownMenuItem>
-      <UiDropdownMenuItem @click="mode = 'auto'">
+      <UiDropdownMenuItem @click="setTheme('auto')">
         <SunMoon />
         System
       </UiDropdownMenuItem>

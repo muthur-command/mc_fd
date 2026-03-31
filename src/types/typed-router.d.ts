@@ -37,16 +37,16 @@ declare module 'vue-router/auto-routes' {
       { path: ParamValue<false> },
       | never
     >,
-    '/ai-talk/': RouteRecordInfo<
-      '/ai-talk/',
-      '/ai-talk',
+    '/apps/': RouteRecordInfo<
+      '/apps/',
+      '/apps',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/apps/': RouteRecordInfo<
-      '/apps/',
-      '/apps',
+    '/apps/docker': RouteRecordInfo<
+      '/apps/docker',
+      '/apps/docker',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -57,7 +57,9 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       Record<never, never>,
       | '/auth/'
+      | '/auth/code-login'
       | '/auth/forgot-password'
+      | '/auth/oauth2-callback'
       | '/auth/otp'
       | '/auth/sign-in'
       | '/auth/sign-in-2'
@@ -70,9 +72,23 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/auth/code-login': RouteRecordInfo<
+      '/auth/code-login',
+      '/auth/code-login',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/auth/forgot-password': RouteRecordInfo<
       '/auth/forgot-password',
       '/auth/forgot-password',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/auth/oauth2-callback': RouteRecordInfo<
+      '/auth/oauth2-callback',
+      '/auth/oauth2-callback',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -105,16 +121,289 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/billing/': RouteRecordInfo<
-      '/billing/',
-      '/billing',
+    '/dashboard/': RouteRecordInfo<
+      '/dashboard/',
+      '/dashboard',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/dashboard/': RouteRecordInfo<
-      '/dashboard/',
-      '/dashboard',
+    '/dashboard/academy': RouteRecordInfo<
+      '/dashboard/academy',
+      '/dashboard/academy',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/apps/ai-chat': RouteRecordInfo<
+      '/dashboard/apps/ai-chat',
+      '/dashboard/apps/ai-chat',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/apps/ai-image-generator': RouteRecordInfo<
+      '/dashboard/apps/ai-image-generator',
+      '/dashboard/apps/ai-image-generator',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/apps/api-keys': RouteRecordInfo<
+      '/dashboard/apps/api-keys',
+      '/dashboard/apps/api-keys',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/apps/calendar': RouteRecordInfo<
+      '/dashboard/apps/calendar',
+      '/dashboard/apps/calendar',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/apps/chat': RouteRecordInfo<
+      '/dashboard/apps/chat',
+      '/dashboard/apps/chat',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/apps/file-manager': RouteRecordInfo<
+      '/dashboard/apps/file-manager',
+      '/dashboard/apps/file-manager',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/apps/kanban': RouteRecordInfo<
+      '/dashboard/apps/kanban',
+      '/dashboard/apps/kanban',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/apps/mail': RouteRecordInfo<
+      '/dashboard/apps/mail',
+      '/dashboard/apps/mail',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/apps/notes': RouteRecordInfo<
+      '/dashboard/apps/notes',
+      '/dashboard/apps/notes',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/apps/pos-system': RouteRecordInfo<
+      '/dashboard/apps/pos-system',
+      '/dashboard/apps/pos-system',
+      Record<never, never>,
+      Record<never, never>,
+      | '/dashboard/apps/pos-system/tables'
+    >,
+    '/dashboard/apps/pos-system/tables': RouteRecordInfo<
+      '/dashboard/apps/pos-system/tables',
+      '/dashboard/apps/pos-system/tables',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/apps/todo-list-app': RouteRecordInfo<
+      '/dashboard/apps/todo-list-app',
+      '/dashboard/apps/todo-list-app',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/crm': RouteRecordInfo<
+      '/dashboard/crm',
+      '/dashboard/crm',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/crypto': RouteRecordInfo<
+      '/dashboard/crypto',
+      '/dashboard/crypto',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/ecommerce': RouteRecordInfo<
+      '/dashboard/ecommerce',
+      '/dashboard/ecommerce',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/empty-states/01': RouteRecordInfo<
+      '/dashboard/empty-states/01',
+      '/dashboard/empty-states/01',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/empty-states/02': RouteRecordInfo<
+      '/dashboard/empty-states/02',
+      '/dashboard/empty-states/02',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/empty-states/03': RouteRecordInfo<
+      '/dashboard/empty-states/03',
+      '/dashboard/empty-states/03',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/empty-states/coming-soon': RouteRecordInfo<
+      '/dashboard/empty-states/coming-soon',
+      '/dashboard/empty-states/coming-soon',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/file-manager': RouteRecordInfo<
+      '/dashboard/file-manager',
+      '/dashboard/file-manager',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/finance': RouteRecordInfo<
+      '/dashboard/finance',
+      '/dashboard/finance',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/hospital-management': RouteRecordInfo<
+      '/dashboard/hospital-management',
+      '/dashboard/hospital-management',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/hotel': RouteRecordInfo<
+      '/dashboard/hotel',
+      '/dashboard/hotel',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/logistics': RouteRecordInfo<
+      '/dashboard/logistics',
+      '/dashboard/logistics',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/onboarding-flow': RouteRecordInfo<
+      '/dashboard/onboarding-flow',
+      '/dashboard/onboarding-flow',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/orders/': RouteRecordInfo<
+      '/dashboard/orders/',
+      '/dashboard/orders',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/orders/[id]': RouteRecordInfo<
+      '/dashboard/orders/[id]',
+      '/dashboard/orders/:id',
+      { id: ParamValue<true> },
+      { id: ParamValue<false> },
+      | never
+    >,
+    '/dashboard/orders/detail': RouteRecordInfo<
+      '/dashboard/orders/detail',
+      '/dashboard/orders/detail',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/pricing/column': RouteRecordInfo<
+      '/dashboard/pricing/column',
+      '/dashboard/pricing/column',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/pricing/single': RouteRecordInfo<
+      '/dashboard/pricing/single',
+      '/dashboard/pricing/single',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/pricing/table': RouteRecordInfo<
+      '/dashboard/pricing/table',
+      '/dashboard/pricing/table',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/products/': RouteRecordInfo<
+      '/dashboard/products/',
+      '/dashboard/products',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/products/[id]': RouteRecordInfo<
+      '/dashboard/products/[id]',
+      '/dashboard/products/:id',
+      { id: ParamValue<true> },
+      { id: ParamValue<false> },
+      | never
+    >,
+    '/dashboard/products/create': RouteRecordInfo<
+      '/dashboard/products/create',
+      '/dashboard/products/create',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/profile': RouteRecordInfo<
+      '/dashboard/profile',
+      '/dashboard/profile',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/project-management': RouteRecordInfo<
+      '/dashboard/project-management',
+      '/dashboard/project-management',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/sales': RouteRecordInfo<
+      '/dashboard/sales',
+      '/dashboard/sales',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/system': RouteRecordInfo<
+      '/dashboard/system',
+      '/dashboard/system',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/dashboard/website-analytics': RouteRecordInfo<
+      '/dashboard/website-analytics',
+      '/dashboard/website-analytics',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -180,44 +469,65 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/marketing/': RouteRecordInfo<
-      '/marketing/',
-      '/marketing',
+    '/logs/login/': RouteRecordInfo<
+      '/logs/login/',
+      '/logs/login',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/marketing/hello': RouteRecordInfo<
-      '/marketing/hello',
-      '/marketing/hello',
+    '/logs/opera/': RouteRecordInfo<
+      '/logs/opera/',
+      '/logs/opera',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/settings/': RouteRecordInfo<
-      '/settings/',
-      '/settings',
+    '/plugin/': RouteRecordInfo<
+      '/plugin/',
+      '/plugin',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/settings/account': RouteRecordInfo<
-      '/settings/account',
-      '/settings/account',
+    '/plugin/[name]': RouteRecordInfo<
+      '/plugin/[name]',
+      '/plugin/:name',
+      { name: ParamValue<true> },
+      { name: ParamValue<false> },
+      | never
+    >,
+    '/plugin/theme/': RouteRecordInfo<
+      '/plugin/theme/',
+      '/plugin/theme',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/settings/appearance': RouteRecordInfo<
-      '/settings/appearance',
-      '/settings/appearance',
+    '/plugin/theme/tweak': RouteRecordInfo<
+      '/plugin/theme/tweak',
+      '/plugin/theme/tweak',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/settings/display': RouteRecordInfo<
-      '/settings/display',
-      '/settings/display',
+    '/profile/': RouteRecordInfo<
+      '/profile/',
+      '/profile',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/scene/automation': RouteRecordInfo<
+      '/scene/automation',
+      '/scene/automation',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/settings/backup-restore': RouteRecordInfo<
+      '/settings/backup-restore',
+      '/settings/backup-restore',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -229,16 +539,9 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/sva-components/': RouteRecordInfo<
-      '/sva-components/',
-      '/sva-components',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/tasks/': RouteRecordInfo<
-      '/tasks/',
-      '/tasks',
+    '/settings/upgrade': RouteRecordInfo<
+      '/settings/upgrade',
+      '/settings/upgrade',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -275,15 +578,15 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/ai-talk/index.vue': {
-      routes:
-        | '/ai-talk/'
-      views:
-        | never
-    }
     'src/pages/apps/index.vue': {
       routes:
         | '/apps/'
+      views:
+        | never
+    }
+    'src/pages/apps/docker.vue': {
+      routes:
+        | '/apps/docker'
       views:
         | never
     }
@@ -291,7 +594,9 @@ declare module 'vue-router/auto-routes' {
       routes:
         | '/auth'
         | '/auth/'
+        | '/auth/code-login'
         | '/auth/forgot-password'
+        | '/auth/oauth2-callback'
         | '/auth/otp'
         | '/auth/sign-in'
         | '/auth/sign-in-2'
@@ -305,9 +610,21 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
+    'src/pages/auth/code-login.vue': {
+      routes:
+        | '/auth/code-login'
+      views:
+        | never
+    }
     'src/pages/auth/forgot-password.vue': {
       routes:
         | '/auth/forgot-password'
+      views:
+        | never
+    }
+    'src/pages/auth/oauth2-callback.vue': {
+      routes:
+        | '/auth/oauth2-callback'
       views:
         | never
     }
@@ -335,15 +652,250 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/billing/index.vue': {
-      routes:
-        | '/billing/'
-      views:
-        | never
-    }
     'src/pages/dashboard/index.vue': {
       routes:
         | '/dashboard/'
+      views:
+        | never
+    }
+    'src/pages/dashboard/academy.vue': {
+      routes:
+        | '/dashboard/academy'
+      views:
+        | never
+    }
+    'src/pages/dashboard/apps/ai-chat.vue': {
+      routes:
+        | '/dashboard/apps/ai-chat'
+      views:
+        | never
+    }
+    'src/pages/dashboard/apps/ai-image-generator.vue': {
+      routes:
+        | '/dashboard/apps/ai-image-generator'
+      views:
+        | never
+    }
+    'src/pages/dashboard/apps/api-keys.vue': {
+      routes:
+        | '/dashboard/apps/api-keys'
+      views:
+        | never
+    }
+    'src/pages/dashboard/apps/calendar.vue': {
+      routes:
+        | '/dashboard/apps/calendar'
+      views:
+        | never
+    }
+    'src/pages/dashboard/apps/chat.vue': {
+      routes:
+        | '/dashboard/apps/chat'
+      views:
+        | never
+    }
+    'src/pages/dashboard/apps/file-manager.vue': {
+      routes:
+        | '/dashboard/apps/file-manager'
+      views:
+        | never
+    }
+    'src/pages/dashboard/apps/kanban.vue': {
+      routes:
+        | '/dashboard/apps/kanban'
+      views:
+        | never
+    }
+    'src/pages/dashboard/apps/mail.vue': {
+      routes:
+        | '/dashboard/apps/mail'
+      views:
+        | never
+    }
+    'src/pages/dashboard/apps/notes.vue': {
+      routes:
+        | '/dashboard/apps/notes'
+      views:
+        | never
+    }
+    'src/pages/dashboard/apps/pos-system.vue': {
+      routes:
+        | '/dashboard/apps/pos-system'
+        | '/dashboard/apps/pos-system/tables'
+      views:
+        | 'default'
+    }
+    'src/pages/dashboard/apps/pos-system/tables.vue': {
+      routes:
+        | '/dashboard/apps/pos-system/tables'
+      views:
+        | never
+    }
+    'src/pages/dashboard/apps/todo-list-app.vue': {
+      routes:
+        | '/dashboard/apps/todo-list-app'
+      views:
+        | never
+    }
+    'src/pages/dashboard/crm.vue': {
+      routes:
+        | '/dashboard/crm'
+      views:
+        | never
+    }
+    'src/pages/dashboard/crypto.vue': {
+      routes:
+        | '/dashboard/crypto'
+      views:
+        | never
+    }
+    'src/pages/dashboard/ecommerce.vue': {
+      routes:
+        | '/dashboard/ecommerce'
+      views:
+        | never
+    }
+    'src/pages/dashboard/empty-states/01.vue': {
+      routes:
+        | '/dashboard/empty-states/01'
+      views:
+        | never
+    }
+    'src/pages/dashboard/empty-states/02.vue': {
+      routes:
+        | '/dashboard/empty-states/02'
+      views:
+        | never
+    }
+    'src/pages/dashboard/empty-states/03.vue': {
+      routes:
+        | '/dashboard/empty-states/03'
+      views:
+        | never
+    }
+    'src/pages/dashboard/empty-states/coming-soon.vue': {
+      routes:
+        | '/dashboard/empty-states/coming-soon'
+      views:
+        | never
+    }
+    'src/pages/dashboard/file-manager.vue': {
+      routes:
+        | '/dashboard/file-manager'
+      views:
+        | never
+    }
+    'src/pages/dashboard/finance.vue': {
+      routes:
+        | '/dashboard/finance'
+      views:
+        | never
+    }
+    'src/pages/dashboard/hospital-management.vue': {
+      routes:
+        | '/dashboard/hospital-management'
+      views:
+        | never
+    }
+    'src/pages/dashboard/hotel.vue': {
+      routes:
+        | '/dashboard/hotel'
+      views:
+        | never
+    }
+    'src/pages/dashboard/logistics.vue': {
+      routes:
+        | '/dashboard/logistics'
+      views:
+        | never
+    }
+    'src/pages/dashboard/onboarding-flow.vue': {
+      routes:
+        | '/dashboard/onboarding-flow'
+      views:
+        | never
+    }
+    'src/pages/dashboard/orders/index.vue': {
+      routes:
+        | '/dashboard/orders/'
+      views:
+        | never
+    }
+    'src/pages/dashboard/orders/[id].vue': {
+      routes:
+        | '/dashboard/orders/[id]'
+      views:
+        | never
+    }
+    'src/pages/dashboard/orders/detail.vue': {
+      routes:
+        | '/dashboard/orders/detail'
+      views:
+        | never
+    }
+    'src/pages/dashboard/pricing/column.vue': {
+      routes:
+        | '/dashboard/pricing/column'
+      views:
+        | never
+    }
+    'src/pages/dashboard/pricing/single.vue': {
+      routes:
+        | '/dashboard/pricing/single'
+      views:
+        | never
+    }
+    'src/pages/dashboard/pricing/table.vue': {
+      routes:
+        | '/dashboard/pricing/table'
+      views:
+        | never
+    }
+    'src/pages/dashboard/products/index.vue': {
+      routes:
+        | '/dashboard/products/'
+      views:
+        | never
+    }
+    'src/pages/dashboard/products/[id].vue': {
+      routes:
+        | '/dashboard/products/[id]'
+      views:
+        | never
+    }
+    'src/pages/dashboard/products/create.vue': {
+      routes:
+        | '/dashboard/products/create'
+      views:
+        | never
+    }
+    'src/pages/dashboard/profile.vue': {
+      routes:
+        | '/dashboard/profile'
+      views:
+        | never
+    }
+    'src/pages/dashboard/project-management.vue': {
+      routes:
+        | '/dashboard/project-management'
+      views:
+        | never
+    }
+    'src/pages/dashboard/sales.vue': {
+      routes:
+        | '/dashboard/sales'
+      views:
+        | never
+    }
+    'src/pages/dashboard/system.vue': {
+      routes:
+        | '/dashboard/system'
+      views:
+        | never
+    }
+    'src/pages/dashboard/website-analytics.vue': {
+      routes:
+        | '/dashboard/website-analytics'
       views:
         | never
     }
@@ -401,39 +953,57 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/marketing/index.vue': {
+    'src/pages/logs/login/index.vue': {
       routes:
-        | '/marketing/'
+        | '/logs/login/'
       views:
         | never
     }
-    'src/pages/marketing/hello.vue': {
+    'src/pages/logs/opera/index.vue': {
       routes:
-        | '/marketing/hello'
+        | '/logs/opera/'
       views:
         | never
     }
-    'src/pages/settings/index.vue': {
+    'src/pages/plugin/index.vue': {
       routes:
-        | '/settings/'
+        | '/plugin/'
       views:
         | never
     }
-    'src/pages/settings/account.vue': {
+    'src/pages/plugin/[name].vue': {
       routes:
-        | '/settings/account'
+        | '/plugin/[name]'
       views:
         | never
     }
-    'src/pages/settings/appearance.vue': {
+    'src/pages/plugin/theme/index.vue': {
       routes:
-        | '/settings/appearance'
+        | '/plugin/theme/'
       views:
         | never
     }
-    'src/pages/settings/display.vue': {
+    'src/pages/plugin/theme/tweak.vue': {
       routes:
-        | '/settings/display'
+        | '/plugin/theme/tweak'
+      views:
+        | never
+    }
+    'src/pages/profile/index.vue': {
+      routes:
+        | '/profile/'
+      views:
+        | never
+    }
+    'src/pages/scene/automation.vue': {
+      routes:
+        | '/scene/automation'
+      views:
+        | never
+    }
+    'src/pages/settings/backup-restore.vue': {
+      routes:
+        | '/settings/backup-restore'
       views:
         | never
     }
@@ -443,15 +1013,9 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/sva-components/index.vue': {
+    'src/pages/settings/upgrade.vue': {
       routes:
-        | '/sva-components/'
-      views:
-        | never
-    }
-    'src/pages/tasks/index.vue': {
-      routes:
-        | '/tasks/'
+        | '/settings/upgrade'
       views:
         | never
     }

@@ -13,7 +13,7 @@ defineProps<LayoutHeaderProps>()
       sticky ? 'sticky top-0 z-40 bg-background' : '',
     )"
   >
-    <main>
+    <main v-if="title">
       <h1 class="text-2xl font-bold">
         {{ title }}
       </h1>

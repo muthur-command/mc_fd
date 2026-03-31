@@ -1,0 +1,47 @@
+{
+  "bentoLayout": {
+    "routeTitle": "Bento 布局",
+    "pageTitle": "Bento 布局",
+    "pageDescription": "拖拽与调整网格中的卡片位。格子可关联「卡片管理」中的卡片；布局按页面 ID 保存在服务端。",
+    "buttons": {
+      "addCard": "添加卡片位",
+      "saveLayout": "保存布局",
+      "loadLayout": "加载布局",
+      "resetLayout": "重置布局",
+      "deleteCard": "删除卡片位"
+    },
+    "cards": {
+      "defaultTitle": "卡片",
+      "position": "位置",
+      "size": "尺寸",
+      "newCard": "新卡片",
+      "overview": "概览",
+      "statistics": "统计",
+      "trends": "趋势",
+      "activities": "活动",
+      "details": "详情",
+      "list": "列表"
+    },
+    "loading": {
+      "saving": "正在保存…",
+      "loading": "正在加载…"
+    },
+    "messages": {
+      "layoutReset": "布局已重置",
+      "layoutSaved": "布局保存成功",
+      "saveFailed": "保存失败",
+      "saveError": "保存布局失败，请稍后重试",
+      "layoutLoaded": "布局加载成功",
+      "layoutNotFound": "暂无已保存布局，已使用默认布局",
+      "loadError": "加载布局失败，请稍后重试"
+    },
+    "addDialog": {
+      "title": "添加卡片位",
+      "blank": "空白卡片位",
+      "fromStoreHint": "从卡片库选择（与「卡片管理」同源）",
+      "allAdded": "卡片库中的卡片已全部添加到画布",
+      "noCatalog": "暂无来自接口的卡片，仍可添加空白卡片位。",
+      "close": "关闭"
+    }
+  }
+}

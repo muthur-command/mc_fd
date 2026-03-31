@@ -1,7 +1,7 @@
 <script setup lang="ts" generic="T">
 import type { Table } from '@tanstack/vue-table'
 
-import { RefreshCcw, Settings2 } from 'lucide-vue-next'
+import { Columns, RefreshCcw } from 'lucide-vue-next'
 
 interface DataTableViewOptionsProps {
   table: Table<T>
@@ -28,8 +28,8 @@ function resetColumnVisible() {
         size="sm"
         class="hidden h-8 ml-auto lg:flex"
       >
-        <Settings2 class="size-4 mr-2" />
-        Columns View
+        <Columns class="size-4 mr-2" />
+        <span class="hidden md:inline">Columns</span>
       </UiButton>
     </UiDropdownMenuTrigger>
     <UiDropdownMenuContent align="end" class="w-[150px]">

@@ -9,7 +9,7 @@ const emit = defineEmits<{
   (e: 'click'): void
 }>()
 
-const { navData, otherPages } = useSidebar()
+const { navData } = useSidebar()
 
 function getFlatNavItems(navData: NavGroup[]): NavItem[] {
   const flatItems: NavItem[] = []
@@ -18,7 +18,7 @@ function getFlatNavItems(navData: NavGroup[]): NavItem[] {
       if (item.items) {
         flatItems.push(...getFlatNavItems([item as unknown as NavGroup]))
       }
-      else {
+      else if (item.url && item.url !== '#') {
         flatItems.push(item)
       }
     })
@@ -26,12 +26,17 @@ function getFlatNavItems(navData: NavGroup[]): NavItem[] {
   return flatItems
 }
 
-const commands = getFlatNavItems([...navData.value!, ...otherPages.value!])
+const commands = computed(() => getFlatNavItems(navData.value ?? []))
 
 const router = useRouter()
 const route = useRoute()
-function commandItemClick(url: string) {
+function commandItemClick(item: NavItem & { url: string }) {
   emit('click')
+  const url = item.url
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    window.open(url, '_blank', 'noopener,noreferrer')
+    return
+  }
   if (route.fullPath !== url) {
     router.push(url)
   }
@@ -44,7 +49,7 @@ function commandItemClick(url: string) {
       v-for="command in commands"
       :key="command.title"
       :value="command.title"
-      @click="commandItemClick(command.url!)"
+      @click="commandItemClick(command as NavItem & { url: string })"
     >
       <CommandItemHasIcon :name="command.title" :icon="command.icon" />
     </UiCommandItem>

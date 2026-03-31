@@ -4,15 +4,11 @@ import {
   Plus,
 } from 'lucide-vue-next'
 
-import { useSidebar } from '@/components/ui/sidebar'
-
 import type { Team } from './types'
 
 const { teams } = defineProps<{
   teams: Team[]
 }>()
-
-const { isMobile, open } = useSidebar()
 
 const activeTeam = ref<Team>(teams[0])
 function setActiveTeam(team: Team) {
@@ -44,9 +40,16 @@ function handleSelect(command: TComponent) {
               class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <div
-                class="flex items-center justify-center rounded-lg aspect-square size-8 bg-sidebar-primary text-sidebar-primary-foreground"
+                class="flex shrink-0 items-center justify-center rounded-lg aspect-square size-8 bg-transparent text-sidebar-foreground overflow-hidden"
               >
-                <component :is="activeTeam.logo" class="size-4" />
+                <img
+                  v-if="activeTeam.logoUrl"
+                  :src="activeTeam.logoUrl"
+                  :alt="activeTeam.name"
+                  class="size-full object-contain"
+                >
+                <span v-else-if="activeTeam.logoEmoji" class="text-xl leading-none">{{ activeTeam.logoEmoji }}</span>
+                <component :is="activeTeam.logo" v-else class="size-4" />
               </div>
               <div class="grid flex-1 text-sm leading-tight text-left">
                 <span class="font-semibold truncate">{{ activeTeam.name }}</span>
@@ -58,7 +61,7 @@ function handleSelect(command: TComponent) {
           <UiDropdownMenuContent
             class="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
             align="start"
-            :side="(isMobile || open) ? 'bottom' : 'right'"
+            side="right"
             :side-offset="4"
           >
             <UiDropdownMenuLabel class="text-xs text-muted-foreground">
@@ -70,8 +73,15 @@ function handleSelect(command: TComponent) {
               class="gap-2 p-2"
               @click="setActiveTeam(team)"
             >
-              <div class="flex items-center justify-center border rounded-sm size-6">
-                <component :is="team.logo" class="size-4 shrink-0" />
+              <div class="flex items-center justify-center border rounded-sm size-6 overflow-hidden">
+                <img
+                  v-if="team.logoUrl"
+                  :src="team.logoUrl"
+                  :alt="team.name"
+                  class="size-4 object-contain shrink-0"
+                >
+                <span v-else-if="team.logoEmoji" class="text-base leading-none shrink-0">{{ team.logoEmoji }}</span>
+                <component :is="team.logo" v-else class="size-4 shrink-0" />
               </div>
               {{ team.name }}
               <UiDropdownMenuShortcut>⌘{{ index + 1 }}</UiDropdownMenuShortcut>

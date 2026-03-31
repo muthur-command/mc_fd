@@ -1,0 +1,18 @@
+{
+  "auth": {
+    "oauth2Callback": {
+      "loginSuccess": "Login successful",
+      "missingToken": "Missing access_token or session_uuid",
+      "loginFailed": "Login failed",
+      "backToLogin": "Back to login"
+    }
+  },
+  "pluginManage": {
+    "plugins": {
+      "oauth2": {
+        "summary": "OAuth 2.0",
+        "description": "Support GitHub, Google and other social platform login"
+      }
+    }
+  }
+}

@@ -1,75 +1,62 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
 import AuthTitle from './components/auth-title.vue'
 import GitHubButton from './components/github-button.vue'
 import GoogleButton from './components/google-button.vue'
 import PrivacyPolicyButton from './components/privacy-policy-button.vue'
 import TermsOfServiceButton from './components/terms-of-service-button.vue'
+
+const { t } = useI18n()
 </script>
 
 <template>
-  <div class="flex items-center justify-center min-h-screen p-4 min-w-screen">
-    <main class="flex flex-col gap-4">
+  <div class="flex min-h-screen min-w-screen items-center justify-center p-4">
+    <main class="flex w-full max-w-md flex-col gap-4">
       <AuthTitle />
-      <UiCard class="max-w-sm mx-auto">
+      <UiCard class="w-full">
         <UiCardHeader>
           <UiCardTitle class="text-xl">
-            Sign Up
+            {{ t('auth.signUpPage.title') }}
           </UiCardTitle>
           <UiCardDescription>
-            Enter your email and password to create an account.
-            Already have an account?
-            <UiButton
-              variant="link" class="px-0 text-muted-foreground"
-              @click="$router.push('/auth/sign-in')"
-            >
-              Sign In
+            {{ t('auth.signUpPage.description') }}
+            <UiButton variant="link" class="px-0 text-muted-foreground" @click="$router.push('/auth/sign-in')">
+              {{ t('auth.title') }}
             </UiButton>
           </UiCardDescription>
         </UiCardHeader>
         <UiCardContent>
           <div class="grid gap-4">
-            <div class="grid grid-cols-2 gap-4">
-              <div class="grid gap-2">
-                <UiLabel for="first-name">
-                  First name
-                </UiLabel>
-                <UiInput id="first-name" placeholder="Max" required />
-              </div>
-              <div class="grid gap-2">
-                <UiLabel for="last-name">
-                  Last name
-                </UiLabel>
-                <UiInput id="last-name" placeholder="Robinson" required />
-              </div>
+            <div class="grid gap-2">
+              <UiLabel for="name">
+                {{ t('auth.signUpPage.name') }}
+              </UiLabel>
+              <UiInput id="name" :placeholder="t('auth.signUpPage.namePlaceholder')" required />
             </div>
             <div class="grid gap-2">
               <UiLabel for="email">
-                Email
+                {{ t('auth.signUpPage.email') }}
               </UiLabel>
-              <UiInput
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-              />
+              <UiInput id="email" type="email" :placeholder="t('auth.signUpPage.emailPlaceholder')" required />
             </div>
             <div class="grid gap-2">
               <UiLabel for="password">
-                Password
+                {{ t('auth.signUpPage.password') }}
               </UiLabel>
-              <UiInput id="password" type="password" placeholder="******" />
+              <UiInput id="password" type="password" :placeholder="t('auth.signUpPage.passwordPlaceholder')" />
             </div>
             <div class="grid gap-2">
-              <UiLabel for="password">
-                Confirm Password
+              <UiLabel for="confirm-password">
+                {{ t('auth.signUpPage.confirmPassword') }}
               </UiLabel>
-              <UiInput id="password" type="password" placeholder="******" />
+              <UiInput id="confirm-password" type="password" :placeholder="t('auth.signUpPage.passwordPlaceholder')" />
             </div>
             <UiButton type="submit" class="w-full">
-              Create Account
+              {{ t('auth.signUpPage.createAccount') }}
             </UiButton>
 
-            <UiSeparator label="Or continue with" />
+            <UiSeparator :label="t('auth.signUpPage.thirdPartySeparator')" />
 
             <div class="flex flex-col items-center justify-between gap-4">
               <GitHubButton />
@@ -77,9 +64,9 @@ import TermsOfServiceButton from './components/terms-of-service-button.vue'
             </div>
 
             <UiCardDescription>
-              By creating an account, you agree to our
+              {{ t('auth.signUpPage.termsPrefix') }}
               <TermsOfServiceButton />
-              and
+              {{ t('auth.termsAnd') }}
               <PrivacyPolicyButton />
             </UiCardDescription>
           </div>

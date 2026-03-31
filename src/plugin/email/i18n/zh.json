@@ -1,0 +1,13 @@
+{
+  "pluginMenu": {
+    "emailVerify": "邮箱验证码"
+  },
+  "pluginSystem": {
+    "plugins": {
+      "email": {
+        "summary": "电子邮件",
+        "description": "提供邮件发送功能，支持验证码、通知等场景"
+      }
+    }
+  }
+}

@@ -1,8 +1,5 @@
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue'
-import { useColorMode } from '@vueuse/core'
-
-const mode = useColorMode()
 
 const links = [
   {
@@ -25,9 +22,7 @@ const links = [
 
 <template>
   <footer class="min-h-18 flex items-center justify-between">
-    <UiAvatar>
-      <UiAvatarImage :src="`${mode === 'dark' ? '/logo.svg' : '/logo-black.svg'}`" alt="Logo" />
-    </UiAvatar>
+    <span class="text-2xl" aria-hidden="true">🐣</span>
 
     <div>© 2025 Whbbit1999</div>
 

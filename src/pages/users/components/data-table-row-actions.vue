@@ -4,19 +4,22 @@ import type { Component } from 'vue'
 
 import { Ellipsis } from 'lucide-vue-next'
 
+import type { SysUserResult } from '@/services/api/core/user.api'
+
 import { useModal } from '@/composables/use-modal'
 
-import type { User } from '../data/schema'
-
 interface DataTableRowActionsProps {
-  row: Row<User>
+  row: Row<SysUserResult>
 }
+
 const props = defineProps<DataTableRowActionsProps>()
 const user = computed(() => props.row.original)
 const isOpen = ref(false)
 
+const fetchList = inject<() => Promise<void>>('userListFetch', () => Promise.resolve())
+
 const showComponent = shallowRef<Component | null>(null)
-type TCommand = 'edit' | 'delete'
+type TCommand = 'edit' | 'delete' | 'reset_password'
 function handleSelect(command: TCommand) {
   switch (command) {
     case 'edit':
@@ -25,8 +28,17 @@ function handleSelect(command: TCommand) {
     case 'delete':
       showComponent.value = defineAsyncComponent(() => import('./user-delete.vue'))
       break
+    case 'reset_password':
+      showComponent.value = defineAsyncComponent(() => import('./user-reset-password.vue'))
+      break
   }
 }
+
+function onClose() {
+  isOpen.value = false
+  fetchList()
+}
+
 const { contentClass, Modal } = useModal()
 </script>
 
@@ -45,21 +57,27 @@ const { contentClass, Modal } = useModal()
       <UiDropdownMenuContent align="end" class="w-[160px]">
         <component :is="Modal.Trigger" as-child>
           <UiDropdownMenuItem @click.stop="handleSelect('edit')">
-            Edit
+            {{ $t('user.actions.edit') }}
           </UiDropdownMenuItem>
         </component>
-
         <component :is="Modal.Trigger" as-child>
-          <UiDropdownMenuItem @click.stop="handleSelect('delete')">
-            Delete
-            <UiDropdownMenuShortcut>⌘⌫</UiDropdownMenuShortcut>
+          <UiDropdownMenuItem @click.stop="handleSelect('reset_password')">
+            {{ $t('user.actions.resetPassword') }}
+          </UiDropdownMenuItem>
+        </component>
+        <component :is="Modal.Trigger" as-child>
+          <UiDropdownMenuItem
+            :disabled="user.username === 'admin'"
+            @click.stop="handleSelect('delete')"
+          >
+            {{ $t('user.actions.delete') }}
           </UiDropdownMenuItem>
         </component>
       </UiDropdownMenuContent>
     </UiDropdownMenu>
 
     <component :is="Modal.Content" :class="contentClass">
-      <component :is="showComponent" :user="user" @close="isOpen = false" />
+      <component :is="showComponent" :user="user" @close="onClose" />
     </component>
   </component>
 </template>

@@ -1,4 +1,4 @@
-import type { ColumnDef } from '@tanstack/vue-table'
+import type { ColumnDef, VisibilityState } from '@tanstack/vue-table'
 
 export interface FacetedFilterOption {
   label: string
@@ -19,4 +19,8 @@ export interface DataTableProps<T> {
   columns: ColumnDef<T, any>[]
   data: T[]
   serverPagination?: ServerPagination
+  /** 行唯一 id，用于稳定勾选状态（如服务端分页） */
+  getRowId?: (row: T) => string
+  /** 初始列可见性，未列出的列默认显示 */
+  initialColumnVisibility?: VisibilityState
 }

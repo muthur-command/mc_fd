@@ -1,0 +1,59 @@
+{
+  "pluginManage": {
+    "plugins": {
+      "system_monitor": {
+        "summary": "系统监控",
+        "description": "服务器 CPU、内存、磁盘与系统信息",
+        "sidebarMenuName": "监控"
+      }
+    }
+  },
+  "systemMonitor": {
+    "title": "系统监控",
+    "description": "服务器 CPU、内存、磁盘与系统信息",
+    "cpu": "CPU",
+    "cpuUsage": "使用率",
+    "cpuCurrentFreq": "当前频率",
+    "cpuLogicalNum": "逻辑核心数",
+    "cpuPhysicalNum": "物理核心数",
+    "memory": "内存",
+    "memoryTotal": "总内存",
+    "memoryUsed": "已用",
+    "memoryFree": "可用",
+    "memoryUsage": "使用率",
+    "service": "服务信息",
+    "system": "系统信息",
+    "disk": "磁盘",
+    "diskDir": "挂载点",
+    "diskType": "文件系统类型",
+    "diskDevice": "设备",
+    "diskTotal": "总容量",
+    "diskFree": "可用",
+    "diskUsed": "已用",
+    "diskUsage": "使用率",
+    "unitPercent": "%",
+    "unitMhz": "MHz",
+    "unitGb": "GB",
+    "usedOfTotal": "{used} / {total} GB",
+    "logicalCores": "{n} 逻辑核心",
+    "partitions": "{n} 个分区",
+    "usedPercent": "{p}% 已使用",
+    "onlineUsers": "在线用户",
+    "todayOnline": "今日在线",
+    "platformOverview": "平台预览",
+    "redisOverview": "Redis 概览",
+    "redisUptime": "运行时长",
+    "redisConnectedClients": "连接数",
+    "redisMemoryUsed": "已用内存",
+    "redisMaxMemory": "最大内存",
+    "redisKeys": "键总数",
+    "redisUptimeFormat": "{days} 天 {hours} 小时 {minutes} 分钟 {seconds} 秒",
+    "autoRefresh": "自动刷新",
+    "refreshEvery": "刷新间隔",
+    "every1s": "每 1 秒",
+    "every5s": "每 5 秒",
+    "every10s": "每 10 秒",
+    "every30s": "每 30 秒",
+    "every60s": "每 1 分钟"
+  }
+}

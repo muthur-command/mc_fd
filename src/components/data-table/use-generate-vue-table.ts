@@ -10,7 +10,7 @@ import type { DataTableProps } from './types'
 export function generateVueTable<T>(props: DataTableProps<T>) {
   const sorting = ref<SortingState>([])
   const columnFilters = ref<ColumnFiltersState>([])
-  const columnVisibility = ref<VisibilityState>({})
+  const columnVisibility = ref<VisibilityState>(props.initialColumnVisibility ?? {})
   const columnPinning = ref<ColumnPinningState>({ left: [], right: [] })
   const rowSelection = ref({})
   const pagination = ref<PaginationState>({
@@ -44,6 +44,7 @@ export function generateVueTable<T>(props: DataTableProps<T>) {
   const tableConfig: TableOptionsWithReactiveData<T> = {
     get data() { return props.data },
     get columns() { return props.columns },
+    ...(props.getRowId && { getRowId: (row: T) => props.getRowId!(row) }),
     state: {
       get sorting() { return sorting.value },
       get columnFilters() { return columnFilters.value },

@@ -1,0 +1,18 @@
+{
+  "auth": {
+    "oauth2Callback": {
+      "loginSuccess": "登录成功",
+      "missingToken": "缺少 access_token 或 session_uuid",
+      "loginFailed": "登录失败",
+      "backToLogin": "返回登录"
+    }
+  },
+  "pluginManage": {
+    "plugins": {
+      "oauth2": {
+        "summary": "OAuth 2.0",
+        "description": "支持 GitHub、Google 等社交平台登录"
+      }
+    }
+  }
+}

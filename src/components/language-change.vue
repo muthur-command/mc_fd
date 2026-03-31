@@ -5,9 +5,9 @@ import { Icon } from '@iconify/vue'
 <template>
   <UiDropdownMenu>
     <UiDropdownMenuTrigger as-child>
-      <UiButton variant="outline">
-        <Icon icon="mdi:translate" />
-        {{ $t('language') }}
+      <UiButton variant="outline" size="icon" :aria-label="$t('changeLanguage')">
+        <Icon icon="mdi:translate" class="size-4" />
+        <span class="sr-only">{{ $t('changeLanguage') }}</span>
       </UiButton>
     </UiDropdownMenuTrigger>
     <UiDropdownMenuContent class="w-56">

@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import { useColorMode } from '@vueuse/core'
+import { useI18n } from 'vue-i18n'
 
-const mode = useColorMode()
-const logo = computed(() => {
-  return mode.value === 'dark' ? '/logo.svg' : '/logo-black.svg'
-})
+const { t } = useI18n()
 </script>
 
 <template>
   <h1 class="flex items-center gap-2 text-xl font-bold">
-    <img :src="logo">
-    <span>Shadcn Vue Admin</span>
+    <span class="text-2xl" aria-hidden="true">🐣</span>
+    <span>{{ t('auth.appName') }}</span>
   </h1>
 </template>

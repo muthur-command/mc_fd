@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useEventListener } from '@vueuse/core'
-import { MenuIcon, SearchIcon } from 'lucide-vue-next'
-
-import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
+import { Command as CommandIcon, SearchIcon } from 'lucide-vue-next'
 
 import CommandChangeTheme from './command-change-theme.vue'
 import CommandToPage from './command-to-page.vue'
@@ -20,43 +18,35 @@ function handleOpenChange() {
   open.value = !open.value
 }
 
-const firstKey = computed(() => navigator?.userAgent.includes('Mac OS') ? '⌘' : 'Ctrl')
+const firstKey = computed(() => navigator?.userAgent?.includes('Mac OS') ? '⌘' : 'Ctrl')
 </script>
 
 <template>
-  <div>
-    <div
-      class="text-sm items-center justify-between text-muted-foreground border border-border bg-muted/5 px-4 py-2 rounded-md md:min-w-[220px] cursor-pointer hidden md:flex"
-      @click="handleOpenChange"
-    >
-      <div class="flex items-center gap-2">
-        <SearchIcon class="size-4" />
-        <span class="text-xs font-semibold text-muted-foreground">Search Menu</span>
+  <div class="lg:flex-1">
+    <div class="relative hidden max-w-sm flex-1 lg:block">
+      <SearchIcon class="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+      <input
+        readonly
+        type="search"
+        placeholder="Search..."
+        class="h-9 w-full cursor-pointer rounded-md border border-border bg-background pr-4 pl-10 text-sm text-foreground shadow-xs placeholder:text-muted-foreground"
+        @click="open = true"
+      >
+      <div class="absolute top-1/2 right-2 hidden -translate-y-1/2 items-center gap-0.5 rounded-sm bg-zinc-200 p-1 font-mono text-xs font-medium sm:flex dark:bg-neutral-700">
+        <CommandIcon class="size-3" />
+        <span>{{ firstKey }}</span>
+        <span>k</span>
       </div>
-      <UiKbd>{{ firstKey }} + k</UiKbd>
     </div>
-
-    <UiButton variant="outline" size="icon" class="md:hidden" @click="handleOpenChange">
-      <SearchIcon />
-    </UiButton>
-
+    <div class="block lg:hidden">
+      <UiButton size="icon" variant="ghost" @click="handleOpenChange">
+        <SearchIcon />
+      </UiButton>
+    </div>
     <UiCommandDialog v-model:open="open">
       <UiCommandInput placeholder="Type a command or search..." />
       <UiCommandList>
-        <UiCommandEmpty>
-          <Empty>
-            <EmptyHeader>
-              <EmptyMedia variant="icon">
-                <MenuIcon />
-              </EmptyMedia>
-              <EmptyTitle>No menu found.</EmptyTitle>
-              <EmptyDescription>
-                Try searching for a command or check the spelling.
-              </EmptyDescription>
-            </EmptyHeader>
-          </Empty>
-        </UiCommandEmpty>
-
+        <UiCommandEmpty>No results found.</UiCommandEmpty>
         <CommandToPage @click="handleOpenChange" />
         <UiCommandSeparator />
         <CommandChangeTheme @click="handleOpenChange" />

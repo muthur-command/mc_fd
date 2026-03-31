@@ -4,40 +4,31 @@ import { useAuthStore } from '@/stores/auth'
 
 export function useAuth() {
   const router = useRouter()
-
   const authStore = useAuthStore()
-  const { isLogin } = storeToRefs(authStore)
-  const loading = ref(false)
+  const { isLogin, loginLoading } = storeToRefs(authStore)
 
-  function logout() {
-    isLogin.value = false
-
-    router.push({ path: '/auth/sign-in' })
+  async function logout() {
+    await authStore.logout()
+    const current = router.currentRoute.value.fullPath
+    await router.replace({
+      path: '/auth/sign-in',
+      query: current && current !== '/auth/sign-in' ? { redirect: current } : {},
+    })
   }
 
   function toHome() {
-    router.push({ path: '/workspace' })
+    router.push({ path: '/dashboard' })
   }
 
-  async function login() {
-    loading.value = true
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    // mock login
-    isLogin.value = true
-    loading.value = false
-
-    const redirect = router.currentRoute.value.query.redirect as string
-    if (!redirect || redirect.startsWith('//')) {
-      toHome()
-    }
-    else {
-      router.push(redirect)
-    }
+  async function login(params: { username: string, password: string, captcha?: string, uuid?: string }) {
+    return authStore.authLogin(params)
   }
 
   return {
-    loading,
+    isLogin,
+    loading: loginLoading,
     logout,
+    toHome,
     login,
   }
 }

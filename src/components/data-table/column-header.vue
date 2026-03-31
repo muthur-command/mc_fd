@@ -24,13 +24,13 @@ export default {
 </script>
 
 <template>
-  <div v-if="canSorted || canPinned" :class="cn('flex items-center space-x-2', $attrs.class ?? '')">
+  <div v-if="canSorted || canPinned" :class="cn('flex items-center space-x-2 text-muted-foreground', $attrs.class ?? '')">
     <UiDropdownMenu>
       <UiDropdownMenuTrigger as-child>
         <UiButton
           variant="ghost"
           size="sm"
-          class="-ml-3 h-8 data-[state=open]:bg-accent"
+          class="-ml-3 h-8 text-muted-foreground data-[state=open]:bg-accent"
         >
           <template v-if="canPinned">
             <PinIcon v-if="props.column.getIsPinned()" class="ml-2 size-4 text-primary" />
@@ -87,7 +87,7 @@ export default {
     </UiDropdownMenu>
   </div>
 
-  <div v-else :class="$attrs.class">
+  <div v-else :class="cn('text-muted-foreground', $attrs.class)">
     {{ title }}
   </div>
 </template>

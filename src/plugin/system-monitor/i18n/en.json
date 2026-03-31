@@ -1,0 +1,59 @@
+{
+  "pluginManage": {
+    "plugins": {
+      "system_monitor": {
+        "summary": "System Monitor",
+        "description": "Server CPU, memory, disk and system info",
+        "sidebarMenuName": "Monitor"
+      }
+    }
+  },
+  "systemMonitor": {
+    "title": "System Monitor",
+    "description": "Server CPU, memory, disk and system info",
+    "cpu": "CPU",
+    "cpuUsage": "Usage",
+    "cpuCurrentFreq": "Current freq",
+    "cpuLogicalNum": "Logical cores",
+    "cpuPhysicalNum": "Physical cores",
+    "memory": "Memory",
+    "memoryTotal": "Total",
+    "memoryUsed": "Used",
+    "memoryFree": "Free",
+    "memoryUsage": "Usage",
+    "service": "Service",
+    "system": "System",
+    "disk": "Disk",
+    "diskDir": "Mount",
+    "diskType": "Type",
+    "diskDevice": "Device",
+    "diskTotal": "Total",
+    "diskFree": "Free",
+    "diskUsed": "Used",
+    "diskUsage": "Usage",
+    "unitPercent": "%",
+    "unitMhz": "MHz",
+    "unitGb": "GB",
+    "usedOfTotal": "{used} / {total} GB",
+    "logicalCores": "{n} logical cores",
+    "partitions": "{n} partitions",
+    "usedPercent": "{p}% used",
+    "onlineUsers": "Online Users",
+    "todayOnline": "Today's Online",
+    "platformOverview": "Platform Overview",
+    "redisOverview": "Redis Overview",
+    "redisUptime": "Uptime",
+    "redisConnectedClients": "Connected Clients",
+    "redisMemoryUsed": "Memory Used",
+    "redisMaxMemory": "Max Memory",
+    "redisKeys": "Keys",
+    "redisUptimeFormat": "{days}d {hours}h {minutes}m {seconds}s",
+    "autoRefresh": "Auto refresh",
+    "refreshEvery": "Refresh interval",
+    "every1s": "Every 1s",
+    "every5s": "Every 5s",
+    "every10s": "Every 10s",
+    "every30s": "Every 30s",
+    "every60s": "Every 1 min"
+  }
+}

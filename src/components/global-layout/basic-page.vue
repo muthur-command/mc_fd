@@ -7,7 +7,7 @@ defineProps<LayoutHeaderProps>()
 </script>
 
 <template>
-  <main>
+  <main class="flex min-h-0 min-w-0 flex-1 flex-col">
     <BasicHeader
       :title="title"
       :description="description"
@@ -18,7 +18,7 @@ defineProps<LayoutHeaderProps>()
       </template>
     </BasicHeader>
 
-    <main class="py-4">
+    <main class="flex min-h-0 min-w-0 flex-1 flex-col py-4">
       <slot />
     </main>
   </main>

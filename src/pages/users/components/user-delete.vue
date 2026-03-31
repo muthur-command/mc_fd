@@ -1,24 +1,27 @@
-<script lang="ts" setup>
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import { toast } from 'vue-sonner'
 
+import type { SysUserResult } from '@/services/api/core/user.api'
+
 import { useModal } from '@/composables/use-modal'
+import { deleteSysUserApi } from '@/services/api/core/user.api'
 
-import type { User } from '../data/schema'
+const props = defineProps<{ user: SysUserResult }>()
+const emit = defineEmits<{ (e: 'close'): void }>()
+const { t } = useI18n()
+const loading = ref(false)
 
-const { user } = defineProps<{
-  user: User
-}>()
-
-const emits = defineEmits<{
-  (e: 'remove'): void
-}>()
-
-function handleRemove() {
-  toast(`The following task has been deleted:`, {
-    description: h('pre', { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' }, h('code', { class: 'text-white' }, JSON.stringify(user, null, 2))),
-  })
-
-  emits('remove')
+async function handleRemove() {
+  loading.value = true
+  try {
+    await deleteSysUserApi(props.user.id)
+    toast.success(t('user.toast.deleteSuccess'))
+    emit('close')
+  }
+  finally {
+    loading.value = false
+  }
 }
 
 const { Modal } = useModal()
@@ -28,26 +31,21 @@ const { Modal } = useModal()
   <div>
     <component :is="Modal.Header">
       <component :is="Modal.Title">
-        Delete this user: {{ user.username }} ?
+        {{ $t('user.modal.confirmDelete') }}
       </component>
-
       <component :is="Modal.Description">
-        You are about to delete a user with the ID {{ user.id }}.This action cannot be undone.
+        {{ $t('user.modal.confirmDeleteDesc', { name: user.username }) }}
       </component>
     </component>
-
     <component :is="Modal.Footer">
       <component :is="Modal.Close" as-child>
         <UiButton variant="outline">
-          Cancel
+          {{ $t('user.modal.cancel') }}
         </UiButton>
       </component>
-
-      <component :is="Modal.Close" as-child>
-        <UiButton variant="destructive" @click="handleRemove">
-          Delete
-        </UiButton>
-      </component>
+      <UiButton variant="destructive" :disabled="loading" @click="handleRemove">
+        {{ loading ? $t('user.modal.deleting') : $t('user.modal.delete') }}
+      </UiButton>
     </component>
   </div>
 </template>

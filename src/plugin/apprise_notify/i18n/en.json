@@ -1,0 +1,86 @@
+{
+  "appriseNotify": {
+    "header": {
+      "title": "Notifications",
+      "viewAll": "View all",
+      "empty": "No notification history yet.",
+      "noTitle": "(No title)",
+      "failed": "Failed",
+      "success": "Sent",
+      "loading": "Loading…"
+    },
+    "routeTitle": "Notifications (Apprise)",
+    "pageTitle": "Apprise notifications",
+    "pageDescription": "Manage Apprise notification URLs, send test messages, and browse delivery history.",
+    "tabs": {
+      "channels": "Channels",
+      "logs": "History"
+    },
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel",
+    "save": "Save",
+    "channels": {
+      "add": "Add channel",
+      "edit": "Edit channel",
+      "empty": "No channels yet. Add an Apprise URL to get started.",
+      "name": "Name",
+      "appriseUrl": "Apprise URL",
+      "appriseUrlHint": "See Apprise docs for supported URLs (Discord, email, ntfy, etc.).",
+      "masked": "Masked",
+      "enabled": "Enabled",
+      "description": "Notes",
+      "actions": "Actions",
+      "test": "Test",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this channel? History entries are kept.",
+      "send": "Send notification",
+      "sendTitle": "Send to channels",
+      "pickChannels": "Select channels",
+      "notifyTitle": "Title",
+      "notifyBody": "Body",
+      "sendSubmit": "Send"
+    },
+    "logs": {
+      "subtitle": "Recent delivery attempts per channel.",
+      "clickHint": "Click any table cell to open full details for that delivery.",
+      "clickToView": "View details",
+      "detailDialogTitle": "Delivery details",
+      "source": "Source",
+      "sourceTest": "Channel test",
+      "sourceNotify": "Notify API / UI send",
+      "sourceUnknown": "Unknown (legacy or not recorded)",
+      "sentTo": "Recipient",
+      "sentToHint": "The named channel is the target in this app; the actual endpoint (Discord, email, etc.) is defined by that channel’s Apprise URL.",
+      "sentToUnnamedChannel": "Unnamed channel (ID: {id})",
+      "channelIdLine": "Channel ID: {id}",
+      "detailLogId": "Record ID: {id}",
+      "detailTimestampMs": "Unix ms: {ms}",
+      "status": "Status",
+      "channel": "Channel",
+      "title": "Title",
+      "body": "Body",
+      "error": "Error",
+      "time": "Time",
+      "empty": "No delivery history yet.",
+      "refresh": "Refresh",
+      "prev": "Previous",
+      "next": "Next",
+      "pageOf": "Page {page} / {total}"
+    },
+    "status": {
+      "success": "Success",
+      "failed": "Failed"
+    },
+    "toast": {
+      "fillRequired": "Please enter name and Apprise URL",
+      "loadChannelsError": "Failed to load channels",
+      "loadLogsError": "Failed to load history",
+      "saved": "Channel saved",
+      "deleted": "Channel deleted",
+      "testOk": "Test notification sent",
+      "notifyPartial": "Some channels failed",
+      "notifyOk": "Notification sent"
+    }
+  }
+}

@@ -6,15 +6,20 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const CHART_PRESET_OPTIONS: typeof import('../constants/themes').CHART_PRESET_OPTIONS
   const CONTENT_LAYOUTS: typeof import('../constants/themes').CONTENT_LAYOUTS
   const DEFAULT_PAGE_SIZE: typeof import('../constants/pagination').DEFAULT_PAGE_SIZE
   const EffectScope: typeof import('vue').EffectScope
+  const FONT_OPTIONS: typeof import('../constants/themes').FONT_OPTIONS
   const PAGE_SIZES: typeof import('../constants/pagination').PAGE_SIZES
   const RADIUS: typeof import('../constants/themes').RADIUS
+  const RADIUS_OPTIONS: typeof import('../constants/themes').RADIUS_OPTIONS
   const RouterPath: typeof import('../constants/route-path').RouterPath
+  const SCALE_OPTIONS: typeof import('../constants/themes').SCALE_OPTIONS
   const THEMES: typeof import('../constants/themes').THEMES
-  const THEMES_COLOR: typeof import('../constants/themes')['THEMES_COLOR']
+  const THEME_PRESETS: typeof import('../constants/themes').THEME_PRESETS
   const THEME_PRIMARY_COLORS: typeof import('../constants/themes').THEME_PRIMARY_COLORS
+  const applyUserPreferences: typeof import('../composables/use-user-preferences').applyUserPreferences
   const computed: typeof import('vue').computed
   const createApp: typeof import('vue').createApp
   const customRef: typeof import('vue').customRef
@@ -31,7 +36,6 @@ declare global {
   const isReadonly: typeof import('vue').isReadonly
   const isRef: typeof import('vue').isRef
   const isShallow: typeof import('vue').isShallow
-  const logout: typeof import('../composables/use-auth')['logout']
   const markRaw: typeof import('vue').markRaw
   const nextTick: typeof import('vue').nextTick
   const onActivated: typeof import('vue').onActivated
@@ -64,6 +68,7 @@ declare global {
   const toValue: typeof import('vue').toValue
   const triggerRef: typeof import('vue').triggerRef
   const unref: typeof import('vue').unref
+  const useAppsSidebar: typeof import('../composables/use-apps-sidebar').useAppsSidebar
   const useAttrs: typeof import('vue').useAttrs
   const useAuth: typeof import('../composables/use-auth').useAuth
   const useAuthStore: typeof import('../stores/auth').useAuthStore
@@ -71,7 +76,6 @@ declare global {
   const useCssModule: typeof import('vue').useCssModule
   const useCssVars: typeof import('vue').useCssVars
   const useId: typeof import('vue').useId
-  const useLink: typeof import('vue-router')['useLink']
   const useModal: typeof import('../composables/use-modal').useModal
   const useModel: typeof import('vue').useModel
   const useRoute: typeof import('vue-router').useRoute
@@ -80,7 +84,6 @@ declare global {
   const useSlots: typeof import('vue').useSlots
   const useSystemTheme: typeof import('../composables/use-system-theme').useSystemTheme
   const useTemplateRef: typeof import('vue').useTemplateRef
-  const useThemeConfig: typeof import('../composables/use-theme-config')['useThemeConfig']
   const useThemeStore: typeof import('../stores/theme').useThemeStore
   const watch: typeof import('vue').watch
   const watchEffect: typeof import('vue').watchEffect
@@ -93,6 +96,9 @@ declare global {
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { Theme, Radius, ContentLayout } from '../constants/themes'
+  export type { Theme, Radius, Scale, ContentLayout, ThemeFont, ChartPreset } from '../constants/themes'
   import('../constants/themes')
+  // @ts-ignore
+  export type { ShadowConfig, HslConfig, CustomColorsConfig } from '../stores/theme'
+  import('../stores/theme')
 }

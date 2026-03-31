@@ -1,7 +1,4 @@
-* {
-  scrollbar-color: #8885 var(--c-border);
-}
-
+/* 与 shadcnuikit-AdminDashboard 一致：WebKit 滚动条使用主题变量 var(--border)，轨道透明 */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -11,15 +8,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--c-border);
-  border-radius: 1px;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #8885;
-  border-radius: 1px;
+  background: var(--border);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #8886;
+  background: var(--muted-foreground);
 }

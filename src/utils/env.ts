@@ -9,9 +9,8 @@ import { z } from 'zod'
  */
 
 const EnvSchema = z.object({
-  // Add your environment variables here, for example:
-  // VITE_API_BASE_URL: z.string().url(),
-  VITE_SERVER_API_URL: z.url(),
+  // 开发时可留空，配合 vite server.proxy 走同源请求避免 CORS；生产填后端完整地址
+  VITE_SERVER_API_URL: z.union([z.string().url(), z.literal(''), z.undefined()]).transform(s => s ?? ''),
   VITE_SERVER_API_PREFIX: z.string(),
   VITE_SERVER_API_TIMEOUT: z.coerce.number().default(5000),
 })

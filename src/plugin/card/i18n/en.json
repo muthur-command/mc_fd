@@ -1,0 +1,39 @@
+{
+  "pluginManage": {
+    "plugins": {
+      "card": {
+        "summary": "Card Management",
+        "description": "Manage dashboard and content cards. Add, edit, and reorder cards.",
+        "sidebarMenuName": "Card"
+      }
+    }
+  },
+  "cardManagement": {
+    "title": "Card Management",
+    "description": "Manage dashboard and content cards. Add, edit, and reorder cards.",
+    "addCard": "Install Card",
+    "loading": "Loading…",
+    "emptyHint": "No cards yet. Add one below.",
+    "noDescription": "No description",
+    "searchPlaceholder": "Search cards…",
+    "moreOptions": "More options",
+    "edit": "Edit",
+    "delete": "Delete",
+    "showRemoteList": "Show remote",
+    "tabLocal": "Installed",
+    "tabRemote": "Remote",
+    "remoteEmptyHint": "No remote cards yet.",
+    "installDialogTitle": "Install local card package",
+    "packageFileLabel": "Card package file",
+    "packageFileHint": "Select a .zip card package file.",
+    "cancel": "Cancel",
+    "install": "Install",
+    "installing": "Installing…",
+    "toastSelectPackage": "Please select a card package file",
+    "toastInstallSuccess": "Installation successful",
+    "toastInstallFailed": "Installation failed",
+    "testCardTitle": "Test card {n}",
+    "remoteCardTitle": "Remote card {n}",
+    "testCardDesc": "This is a test card."
+  }
+}

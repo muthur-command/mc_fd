@@ -1,0 +1,86 @@
+{
+  "appriseNotify": {
+    "header": {
+      "title": "通知",
+      "viewAll": "查看全部",
+      "empty": "暂无通知记录。",
+      "noTitle": "（无标题）",
+      "failed": "失败",
+      "success": "成功",
+      "loading": "加载中…"
+    },
+    "routeTitle": "Apprise 通知",
+    "pageTitle": "Apprise 通知",
+    "pageDescription": "管理 Apprise 通知 URL、发送测试消息并查看投递历史。",
+    "tabs": {
+      "channels": "通知通道",
+      "logs": "发送历史"
+    },
+    "yes": "是",
+    "no": "否",
+    "cancel": "取消",
+    "save": "保存",
+    "channels": {
+      "add": "添加通道",
+      "edit": "编辑通道",
+      "empty": "暂无通道。添加一条 Apprise URL 开始使用。",
+      "name": "名称",
+      "appriseUrl": "Apprise URL",
+      "appriseUrlHint": "支持格式见 Apprise 文档（Discord、邮件、ntfy 等）。",
+      "masked": "脱敏显示",
+      "enabled": "启用",
+      "description": "备注",
+      "actions": "操作",
+      "test": "测试",
+      "delete": "删除",
+      "deleteConfirm": "确定删除该通道？历史记录仍会保留。",
+      "send": "发送通知",
+      "sendTitle": "向通道发送",
+      "pickChannels": "选择通道",
+      "notifyTitle": "标题",
+      "notifyBody": "正文",
+      "sendSubmit": "发送"
+    },
+    "logs": {
+      "subtitle": "按通道记录的最近投递结果。",
+      "clickHint": "点击表格单元格可在弹窗中查看本条记录的完整详情。",
+      "clickToView": "点击查看详情",
+      "detailDialogTitle": "投递详情",
+      "source": "来源",
+      "sourceTest": "通道测试",
+      "sourceNotify": "通知发送（接口 / 页面）",
+      "sourceUnknown": "未知（升级前历史或未记录）",
+      "sentTo": "发送给谁",
+      "sentToHint": "以本系统中的命名通道为接收端；具体终端（如 Discord、邮件地址）由该通道配置的 Apprise URL 决定。",
+      "sentToUnnamedChannel": "未命名通道（ID: {id}）",
+      "channelIdLine": "通道 ID：{id}",
+      "detailLogId": "记录 ID：{id}",
+      "detailTimestampMs": "时间戳（毫秒）：{ms}",
+      "status": "状态",
+      "channel": "通道",
+      "title": "标题",
+      "body": "正文",
+      "error": "错误",
+      "time": "时间",
+      "empty": "暂无发送记录。",
+      "refresh": "刷新",
+      "prev": "上一页",
+      "next": "下一页",
+      "pageOf": "第 {page} / {total} 页"
+    },
+    "status": {
+      "success": "成功",
+      "failed": "失败"
+    },
+    "toast": {
+      "fillRequired": "请填写名称与 Apprise URL",
+      "loadChannelsError": "加载通道失败",
+      "loadLogsError": "加载历史失败",
+      "saved": "通道已保存",
+      "deleted": "已删除通道",
+      "testOk": "测试通知已发送",
+      "notifyPartial": "部分通道发送失败",
+      "notifyOk": "通知已发送"
+    }
+  }
+}

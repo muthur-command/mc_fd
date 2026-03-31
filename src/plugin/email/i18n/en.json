@@ -1,0 +1,10 @@
+{
+  "pluginManage": {
+    "plugins": {
+      "email": {
+        "summary": "Email",
+        "description": "Provides email sending, supports verification codes, notifications and other scenarios"
+      }
+    }
+  }
+}

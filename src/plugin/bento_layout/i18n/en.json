@@ -1,0 +1,47 @@
+{
+  "bentoLayout": {
+    "routeTitle": "Bento layout",
+    "pageTitle": "Bento layout",
+    "pageDescription": "Drag and resize tiles. Tiles can be linked to cards from Card management. Layout is saved per page on the server.",
+    "buttons": {
+      "addCard": "Add tile",
+      "saveLayout": "Save layout",
+      "loadLayout": "Load layout",
+      "resetLayout": "Reset layout",
+      "deleteCard": "Remove tile"
+    },
+    "cards": {
+      "defaultTitle": "Tile",
+      "position": "Position",
+      "size": "Size",
+      "newCard": "New tile",
+      "overview": "Overview",
+      "statistics": "Statistics",
+      "trends": "Trends",
+      "activities": "Activities",
+      "details": "Details",
+      "list": "List"
+    },
+    "loading": {
+      "saving": "Saving…",
+      "loading": "Loading…"
+    },
+    "messages": {
+      "layoutReset": "Layout reset",
+      "layoutSaved": "Layout saved",
+      "saveFailed": "Save failed",
+      "saveError": "Could not save layout",
+      "layoutLoaded": "Layout loaded",
+      "layoutNotFound": "No saved layout for this page; using defaults",
+      "loadError": "Could not load layout"
+    },
+    "addDialog": {
+      "title": "Add tile",
+      "blank": "Blank tile",
+      "fromStoreHint": "From card library",
+      "allAdded": "All catalog cards are already on the board",
+      "noCatalog": "No cards from the API yet; you can still add blank tiles.",
+      "close": "Close"
+    }
+  }
+}
