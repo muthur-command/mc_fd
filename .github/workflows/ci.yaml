@@ -118,10 +118,11 @@ jobs:
           persist-credentials: false
       - name: Register hadolint problem matcher
         run: echo "::add-matcher::.github/workflows/matchers/hadolint.json"
+      # docker://hadolint breaks Dependabot github-actions update_files; use the official action.
       - name: Check ${{ matrix.file }}
-        uses: docker://hadolint/hadolint:v2.12.0@sha256:30a8fd2e785ab6176eed53f74769e04f125afb2f74a6c52aef7d463583b6d45e
+        uses: hadolint/hadolint-action@2332a7b74a6de0dda2e2221d575162eba76ba5e5 # v3.3.0
         with:
-          args: hadolint ${{ matrix.file }}
+          dockerfile: ${{ matrix.file }}
 
   pnpm-install:
     name: Prepare dependencies (pnpm)
