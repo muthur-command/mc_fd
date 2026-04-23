@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n'
 import { RPC } from '@/plugin/openclaw/lib/rpc-methods'
 
 const { t } = useI18n()
-const gateway = inject<ReturnType<import('@/plugin/openclaw/composables/use-openclaw-gateway').default>>('openclaw-gateway')!
+const gateway = inject<ReturnType<typeof import('@/plugin/openclaw/composables/use-openclaw-gateway').useOpenClawGateway>>('openclaw-gateway')!
 const status = ref<unknown>(null)
 const health = ref<unknown>(null)
 const models = ref<unknown[]>([])
@@ -19,7 +19,7 @@ async function load() {
     const [st, he, ml] = await Promise.all([
       gateway.request(RPC.status),
       gateway.request(RPC.health).catch(() => null),
-      gateway.request<{ models?: unknown[] }>(RPC.modelsList).then(r => r?.models ?? []).catch(() => []),
+      gateway.request<{ models?: unknown[] }>(RPC.modelsList).then((r: { models?: unknown[] }) => r?.models ?? []).catch(() => []),
     ])
     status.value = st
     health.value = he

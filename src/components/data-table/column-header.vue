@@ -1,5 +1,6 @@
 <script setup lang="ts" generic="T">
 import type { Column } from '@tanstack/vue-table'
+import type { ClassValue } from 'clsx'
 
 import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, ChevronsUpDownIcon, EyeOffIcon, PinIcon, PinOffIcon } from 'lucide-vue-next'
 import { computed } from 'vue'
@@ -87,7 +88,7 @@ export default {
     </UiDropdownMenu>
   </div>
 
-  <div v-else :class="cn('text-muted-foreground', $attrs.class)">
+  <div v-else :class="cn('text-muted-foreground', $attrs.class as ClassValue)">
     {{ title }}
   </div>
 </template>

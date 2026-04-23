@@ -2,7 +2,7 @@
  * Request client for MC backend API.
  * Backend returns { code: 200, data } - interceptor unwraps to data.
  */
-import type { InternalAxiosRequestConfig } from 'axios'
+import type { AxiosInstance, InternalAxiosRequestConfig } from 'axios'
 
 import axios from 'axios'
 import { toast } from 'vue-sonner'
@@ -228,6 +228,12 @@ export function download(url: string, config?: { params?: Record<string, string>
   return requestClient.get(url, { ...config, responseType: 'blob' }) as Promise<Blob>
 }
 
+/** Axios instance with upload/download (attached below). */
+export interface McRequestClient extends AxiosInstance {
+  upload: typeof upload
+  download: typeof download
+}
+
 // 供插件等使用：requestClient.upload / requestClient.download（与 axios 风格一致）
-;(requestClient as any).upload = upload
-;(requestClient as any).download = download
+;(requestClient as McRequestClient).upload = upload
+;(requestClient as McRequestClient).download = download

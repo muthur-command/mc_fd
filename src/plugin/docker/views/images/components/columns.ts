@@ -55,7 +55,7 @@ function formatId(id: string): string {
 export function createColumns(): ColumnDef<ImageListResponse>[] {
   const { t } = useI18n()
   return [
-    { ...SelectColumn, size: 48 },
+    { ...(SelectColumn as ColumnDef<ImageListResponse>), size: 48 },
     {
       accessorKey: 'id',
       header: ({ column }) =>

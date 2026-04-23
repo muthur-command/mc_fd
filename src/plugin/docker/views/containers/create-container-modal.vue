@@ -90,7 +90,7 @@ const formData = ref<
       readOnly: boolean
     }>
     workingDir: string
-  } & CreateContainerParam
+  } & Omit<CreateContainerParam, 'env' | 'labels'>
 >({
   image: '',
   name: '',
@@ -106,8 +106,8 @@ const formData = ref<
   user: '',
   volumeMappings: [],
   networkMode: 'bridge',
-  envVars: [],
-  labels: [],
+  envVars: [] as Array<{ id: number, key: string, value: string }>,
+  labels: [] as Array<{ id: number, key: string, value: string }>,
   restartPolicy: 'no',
   tty: true,
   stdin_open: true,
@@ -338,8 +338,8 @@ function resetForm() {
     user: '',
     volumeMappings: [],
     networkMode: 'bridge',
-    envVars: [],
-    labels: [],
+    envVars: [] as Array<{ id: number, key: string, value: string }>,
+    labels: [] as Array<{ id: number, key: string, value: string }>,
     restartPolicy: 'no',
     tty: true,
     stdin_open: true,

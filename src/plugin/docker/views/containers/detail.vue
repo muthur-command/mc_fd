@@ -381,7 +381,7 @@ const { Table: VolumesTable, tableApi: volumesTableApi }
 watch(
   () => container.value?.volumes,
   () => {
-    volumesTableApi?.query()
+    volumesTableApi?.refresh()
   },
   { deep: true },
 )
@@ -402,7 +402,7 @@ const { Table: NetworksTable, tableApi: networksTableApi }
 watch(
   () => container.value?.networks,
   () => {
-    networksTableApi?.query()
+    networksTableApi?.refresh()
   },
   { deep: true },
 )

@@ -181,7 +181,7 @@ watch(() => gateway?.connected, (c) => {
           <UiAlert v-if="error" variant="destructive" class="mx-6 mb-4">
             {{ error }}
           </UiAlert>
-          <UiAlert v-else-if="statusMessage" variant="secondary" class="mx-6 mb-4">
+          <UiAlert v-else-if="statusMessage" variant="default" class="mx-6 mb-4">
             {{ statusMessage }}
           </UiAlert>
 

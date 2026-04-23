@@ -82,7 +82,7 @@ const { t } = useI18n()
 const { activeEnvironment, setActiveEnvironment, resetToLocal } = useDockerActiveEnvironment()
 const searchKeyword = ref('')
 const currentPage = ref(1)
-const pageSize = ref(DEFAULT_PAGE_SIZE)
+const pageSize = ref<number>(DEFAULT_PAGE_SIZE)
 
 const systemInfo = ref<null | SystemInfoResponse>(null)
 const diskUsage = ref<DiskUsageResponse | null>(null)
@@ -468,8 +468,8 @@ function lastPage() {
 }
 const canPreviousPage = computed(() => currentPage.value > 1)
 const canNextPage = computed(() => currentPage.value < totalPages.value)
-function handlePageSizeChange(value: string | undefined) {
-  if (!value)
+function handlePageSizeChange(value: unknown) {
+  if (value == null || value === '')
     return
   pageSize.value = Number(value)
   currentPage.value = 1

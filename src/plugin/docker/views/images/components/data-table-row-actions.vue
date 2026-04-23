@@ -88,7 +88,7 @@ async function handleRemove() {
         <AlertDialogDescription class="text-center">
           {{ t('docker.images.messages.deleteConfirmContent', { count: 1 }) }}
           <span class="mt-4 flex items-center justify-center gap-3">
-            <Checkbox id="image-delete-dont-ask" :checked="dontAskAgain" @update:checked="(v) => dontAskAgain = v === true" />
+            <Checkbox id="image-delete-dont-ask" :checked="dontAskAgain" @update:checked="(v: boolean | 'indeterminate') => dontAskAgain = v === true" />
             <Label for="image-delete-dont-ask">Don't ask next again</Label>
           </span>
         </AlertDialogDescription>

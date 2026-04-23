@@ -22,7 +22,7 @@ const props = defineProps<Props>()
 const { t } = useI18n()
 const idFilter = ref('')
 
-watch(idFilter, (v) => {
+watch(idFilter, (v: string) => {
   props.table.getColumn('id')?.setFilterValue(v || undefined)
 }, { immediate: true })
 

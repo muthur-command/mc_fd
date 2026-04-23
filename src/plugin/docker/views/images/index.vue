@@ -244,7 +244,7 @@ onMounted(() => {
           {{ t('docker.images.messages.deleteConfirmContent', { count: imagesToRemove.length }) }}
           <span v-if="batchRemoveSummary" class="mt-2 block font-mono text-xs">{{ batchRemoveSummary }}</span>
           <span class="mt-4 flex items-center justify-center gap-3">
-            <Checkbox id="image-batch-delete-dont-ask" :checked="batchDontAskAgain" @update:checked="(v) => batchDontAskAgain = v === true" />
+            <Checkbox id="image-batch-delete-dont-ask" :checked="batchDontAskAgain" @update:checked="(v: boolean | 'indeterminate') => batchDontAskAgain = v === true" />
             <Label for="image-batch-delete-dont-ask">Don't ask next again</Label>
           </span>
         </AlertDialogDescription>

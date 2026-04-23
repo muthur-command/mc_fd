@@ -200,7 +200,7 @@ function requestBatchRemove() {
         <AlertDialogDescription class="text-center">
           {{ t('docker.images.messages.registryDeleteConfirmContent', { count: selectedIds.size }) }}
           <span class="mt-4 flex items-center justify-center gap-3">
-            <Checkbox id="registry-batch-delete-dont-ask" :checked="batchDontAskAgain" @update:checked="(v) => batchDontAskAgain = v === true" />
+            <Checkbox id="registry-batch-delete-dont-ask" :checked="batchDontAskAgain" @update:checked="(v: boolean | 'indeterminate') => batchDontAskAgain = v === true" />
             <Label for="registry-batch-delete-dont-ask">Don't ask next again</Label>
           </span>
         </AlertDialogDescription>

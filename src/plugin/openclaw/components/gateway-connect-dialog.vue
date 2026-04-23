@@ -5,14 +5,11 @@
 import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import type { useOpenClawAuth } from '@/plugin/openclaw/composables/use-openclaw-auth'
-import type { useOpenClawConfig } from '@/plugin/openclaw/composables/use-openclaw-config'
-
 const props = defineProps<{
   open: boolean
-  config: ReturnType<useOpenClawConfig>
-  auth: ReturnType<useOpenClawAuth>
-  gateway: ReturnType<import('@/plugin/openclaw/composables/use-openclaw-gateway').default>
+  config: ReturnType<typeof import('@/plugin/openclaw/composables/use-openclaw-config').useOpenClawConfig>
+  auth: ReturnType<typeof import('@/plugin/openclaw/composables/use-openclaw-auth').useOpenClawAuth>
+  gateway: ReturnType<typeof import('@/plugin/openclaw/composables/use-openclaw-gateway').useOpenClawGateway>
 }>()
 
 const emit = defineEmits<{ 'update:open': [v: boolean] }>()

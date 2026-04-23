@@ -99,7 +99,7 @@ async function handleRemove() {
         <AlertDialogDescription class="text-center">
           {{ t('docker.networks.modals.deleteConfirmContent', { count: 1, names: network.name }) }}
           <span class="mt-4 flex items-center justify-center gap-3">
-            <Checkbox id="network-delete-dont-ask" :checked="dontAskAgain" @update:checked="(v) => dontAskAgain = v === true" />
+            <Checkbox id="network-delete-dont-ask" :checked="dontAskAgain" @update:checked="(v: boolean | 'indeterminate') => dontAskAgain = v === true" />
             <Label for="network-delete-dont-ask">Don't ask next again</Label>
           </span>
         </AlertDialogDescription>

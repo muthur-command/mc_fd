@@ -167,7 +167,7 @@ onMounted(fetchList)
             names: batchRemoveNames,
           }) }}
           <span class="mt-4 flex items-center justify-center gap-3">
-            <Checkbox id="network-batch-delete-dont-ask" :checked="batchDontAskAgain" @update:checked="(v) => batchDontAskAgain = v === true" />
+            <Checkbox id="network-batch-delete-dont-ask" :checked="batchDontAskAgain" @update:checked="(v: boolean | 'indeterminate') => batchDontAskAgain = v === true" />
             <Label for="network-batch-delete-dont-ask">Don't ask next again</Label>
           </span>
         </AlertDialogDescription>

@@ -48,10 +48,11 @@ const currentTab = computed(() => {
   return segment as keyof typeof TAB_VALUE
 })
 
-function onTabChange(value: string) {
-  if (value === currentTab.value)
+function onTabChange(value: string | number) {
+  const v = String(value)
+  if (v === currentTab.value)
     return
-  router.push(`/plugins/docker/${value}`)
+  router.push(`/plugins/docker/${v}`)
 }
 </script>
 

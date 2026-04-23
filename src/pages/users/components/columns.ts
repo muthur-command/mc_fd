@@ -140,7 +140,7 @@ export function createColumns(refresh: () => void): ColumnDef<SysUserResult>[] {
       accessorKey: 'status',
       header: ({ column }) => h(DataTableColumnHeader<SysUserResult>, { column, title: t('user.columns.status') }),
       cell: ({ row }) => {
-        const raw = row.original as Record<string, unknown>
+        const raw = row.original as unknown as Record<string, unknown>
         const v = raw.status != null ? Number(raw.status) : 0
         const checked = v === 1
         return h(Switch, {
@@ -163,7 +163,7 @@ export function createColumns(refresh: () => void): ColumnDef<SysUserResult>[] {
       accessorKey: 'is_superuser',
       header: ({ column }) => h(DataTableColumnHeader<SysUserResult>, { column, title: t('user.columns.superuser') }),
       cell: ({ row }) => {
-        const raw = row.original as Record<string, unknown>
+        const raw = row.original as unknown as Record<string, unknown>
         const checked = Boolean(raw?.is_superuser)
         return h(Switch, {
           'modelValue': checked,
@@ -184,7 +184,7 @@ export function createColumns(refresh: () => void): ColumnDef<SysUserResult>[] {
       accessorKey: 'is_staff',
       header: ({ column }) => h(DataTableColumnHeader<SysUserResult>, { column, title: t('user.columns.staffLogin') }),
       cell: ({ row }) => {
-        const raw = row.original as Record<string, unknown>
+        const raw = row.original as unknown as Record<string, unknown>
         const checked = Boolean(raw?.is_staff)
         return h(Switch, {
           'modelValue': checked,
@@ -205,7 +205,7 @@ export function createColumns(refresh: () => void): ColumnDef<SysUserResult>[] {
       accessorKey: 'is_multi_login',
       header: ({ column }) => h(DataTableColumnHeader<SysUserResult>, { column, title: t('user.columns.multiLogin') }),
       cell: ({ row }) => {
-        const raw = row.original as Record<string, unknown>
+        const raw = row.original as unknown as Record<string, unknown>
         const checked = Boolean(raw?.is_multi_login)
         return h(Switch, {
           'modelValue': checked,

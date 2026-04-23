@@ -356,7 +356,7 @@ function telegramAccounts(): ChannelAccount[] {
   return Array.isArray(list) ? list : []
 }
 
-function genericRows(key: string, st: Record<string, unknown> | undefined): Array<{ label: string, value: string }> {
+function genericRows(_key: string, st: Record<string, unknown> | undefined): Array<{ label: string, value: string }> {
   if (!st)
     return []
   const rows: Array<{ label: string, value: string }> = []
@@ -480,7 +480,7 @@ watch(
                 {{ whatsapp.lastError }}
               </UiAlert>
 
-              <UiAlert v-if="whatsappMessage" variant="secondary" class="text-sm">
+              <UiAlert v-if="whatsappMessage" variant="default" class="text-sm">
                 {{ whatsappMessage }}
                 <template v-if="whatsappConnectedHint === true">
                   · {{ t('openclaw.channelConnectedOk') }}
@@ -591,7 +591,7 @@ watch(
               </UiAlert>
               <UiAlert
                 v-if="probeSummary(snapshot?.channels?.telegram as Record<string, unknown>)"
-                variant="secondary"
+                variant="default"
                 class="text-sm"
               >
                 {{ probeSummary(snapshot?.channels?.telegram as Record<string, unknown>) }}
@@ -662,7 +662,7 @@ watch(
               </UiAlert>
               <UiAlert
                 v-if="probeSummary(snapshot?.channels?.[key])"
-                variant="secondary"
+                variant="default"
                 class="text-sm"
               >
                 {{ probeSummary(snapshot?.channels?.[key]) }}

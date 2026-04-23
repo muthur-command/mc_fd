@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { RouteLocationRaw } from 'vue-router'
+
 /**
  * Agents 页：对齐 openclaw Control UI agents 布局（Agent 选择器、子页签 Overview / Files / Tools / Skills / Channels / Cron）
  */
@@ -621,14 +623,17 @@ const toolAccessView = computed(() => {
     return { state: 'loading' as const }
   if (!cfg)
     return { state: 'need_config' as const }
+  const ctx = buildToolAccessContext(cfg, id, toolsRes.value, {
+    configLoading: overviewCfgLoading.value,
+    configSaving: overviewCfgSaving.value,
+    catalogLoading: toolsLoading.value,
+    catalogError: toolsErr.value,
+  })
+  if (!ctx)
+    return { state: 'loading' as const }
   return {
     state: 'ready' as const,
-    ctx: buildToolAccessContext(cfg, id, toolsRes.value, {
-      configLoading: overviewCfgLoading.value,
-      configSaving: overviewCfgSaving.value,
-      catalogLoading: toolsLoading.value,
-      catalogError: toolsErr.value,
-    }),
+    ctx,
   }
 })
 
@@ -1302,24 +1307,24 @@ function tabCount(id: Panel): number | null {
             <div v-if="toolAccessView.state === 'loading'" class="text-muted-foreground text-sm">
               {{ t('common.loading') }}
             </div>
-            <UiAlert v-else-if="toolAccessView.state === 'need_config'" variant="secondary" class="text-sm">
+            <UiAlert v-else-if="toolAccessView.state === 'need_config'" variant="default" class="text-sm">
               {{ t('openclaw.agentsToolAccessNeedConfig') }}
             </UiAlert>
             <template v-else-if="toolAccessView.state === 'ready'">
-              <UiAlert v-if="toolAccessView.ctx.hasAgentAllow" variant="secondary" class="text-sm">
+              <UiAlert v-if="toolAccessView.ctx.hasAgentAllow" variant="default" class="text-sm">
                 {{ t('openclaw.agentsToolAccessAllowlistAgent') }}
               </UiAlert>
-              <UiAlert v-if="toolAccessView.ctx.hasGlobalAllow" variant="secondary" class="text-sm">
+              <UiAlert v-if="toolAccessView.ctx.hasGlobalAllow" variant="default" class="text-sm">
                 {{ t('openclaw.agentsToolAccessGlobalAllow') }}
               </UiAlert>
               <UiAlert
                 v-if="toolsLoading && !toolsRes?.groups?.length && !toolsErr"
-                variant="secondary"
+                variant="default"
                 class="text-sm"
               >
                 {{ t('openclaw.agentsToolCatalogLoading') }}
               </UiAlert>
-              <UiAlert v-if="toolsErr" variant="secondary" class="text-sm">
+              <UiAlert v-if="toolsErr" variant="default" class="text-sm">
                 {{ t('openclaw.agentsToolCatalogFallback') }}
               </UiAlert>
               <div
@@ -1642,7 +1647,7 @@ function tabCount(id: Panel): number | null {
                   <RefreshCw class="mr-1 size-3.5" :class="{ 'animate-spin': channelsLoading }" />
                   {{ channelsLoading ? t('openclaw.agentsChannelsRefreshing') : t('openclaw.agentsChannelsRefresh') }}
                 </UiButton>
-                <UiButton variant="ghost" size="sm" @click="router.push({ name: 'PluginOpenclawChannels' })">
+                <UiButton variant="ghost" size="sm" @click="router.push({ name: 'PluginOpenclawChannels' } as unknown as RouteLocationRaw)">
                   <ExternalLink class="size-3.5" />
                 </UiButton>
               </div>
@@ -1653,7 +1658,7 @@ function tabCount(id: Panel): number | null {
             <UiAlert v-if="channelsErr" variant="destructive" class="mt-3 text-sm">
               {{ channelsErr }}
             </UiAlert>
-            <UiAlert v-else-if="!channelsSnap && !channelsLoading" variant="secondary" class="mt-3 text-sm">
+            <UiAlert v-else-if="!channelsSnap && !channelsLoading" variant="default" class="mt-3 text-sm">
               {{ t('openclaw.agentsChannelsLoadHint') }}
             </UiAlert>
             <template v-else-if="!channelsLoading">
@@ -1768,7 +1773,7 @@ function tabCount(id: Panel): number | null {
                   <RefreshCw class="mr-1 size-3.5" :class="{ 'animate-spin': cronLoading }" />
                   {{ cronLoading ? t('openclaw.agentsChannelsRefreshing') : t('openclaw.agentsChannelsRefresh') }}
                 </UiButton>
-                <UiButton variant="outline" size="sm" @click="router.push({ name: 'PluginOpenclawCron' })">
+                <UiButton variant="outline" size="sm" @click="router.push({ name: 'PluginOpenclawCron' } as unknown as RouteLocationRaw)">
                   {{ t('openclaw.agentsCronFullPage') }}
                   <ExternalLink class="ml-1 size-3.5" />
                 </UiButton>

@@ -13,15 +13,15 @@ import { Input } from '@/components/ui/input'
 
 interface Props {
   table: Table<StackListResponse>
-  onDeploy: () => void
-  onBatchRemove: (stacks: StackListResponse[]) => void
+  onDeploy?: () => void
+  onBatchRemove?: (stacks: StackListResponse[]) => void
 }
 
 const props = defineProps<Props>()
 const { t } = useI18n()
 const nameFilter = ref('')
 
-watch(nameFilter, (v) => {
+watch(nameFilter, (v: string) => {
   props.table.getColumn('name')?.setFilterValue(v || undefined)
 }, { immediate: true })
 
@@ -30,7 +30,7 @@ const hasSelection = computed(() => selectedRows.value.length > 0)
 
 function handleBatchRemove() {
   const stacks = selectedRows.value.map(r => r.original)
-  props.onBatchRemove(stacks)
+  props.onBatchRemove?.(stacks)
 }
 </script>
 
@@ -53,7 +53,7 @@ function handleBatchRemove() {
       </Button>
       <InspiraUiRainbowButton
         class="!h-9 gap-1.5 !rounded-md !px-2.5 text-sm"
-        @click="props.onDeploy"
+        @click="() => props.onDeploy?.()"
       >
         <Rocket class="size-4" />
         {{ t('docker.stacks.actions.deploy') }}

@@ -57,7 +57,7 @@ async function onSubmit() {
       await createSysUserApi({
         username: data.username,
         password: data.password!,
-        nickname: data.nickname || undefined,
+        nickname: data.nickname?.trim() ? data.nickname.trim() : '',
         avatar,
         phone: data.phone,
         email: data.email,

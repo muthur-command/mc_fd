@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { RouteLocationRaw } from 'vue-router'
+
 import {
   ArrowDownToLine,
   BarChart3,
@@ -486,7 +488,7 @@ watch(timeZone, () => {
               </div>
             </div>
           </div>
-          <UiAlert v-if="skipDateInterp" variant="secondary" class="text-xs">
+          <UiAlert v-if="skipDateInterp" variant="default" class="text-xs">
             {{ t('openclaw.usageLegacyTz') }}
           </UiAlert>
         </UiCardContent>
@@ -586,7 +588,7 @@ watch(timeZone, () => {
                 <UiTableRow v-for="s in sortedSessions" :key="s.key">
                   <UiTableCell class="max-w-[200px] font-mono text-xs break-all">
                     <RouterLink
-                      :to="{ name: 'PluginOpenclawChat', query: { session: s.key } }"
+                      :to="{ name: 'PluginOpenclawChat', query: { session: s.key } } as unknown as RouteLocationRaw"
                       class="text-primary hover:underline"
                     >
                       {{ s.key }}

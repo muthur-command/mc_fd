@@ -11,7 +11,7 @@ import { RPC } from '@/plugin/openclaw/lib/rpc-methods'
 
 const { t } = useI18n()
 const gateway = inject<
-  ReturnType<typeof import('@/plugin/openclaw/composables/use-openclaw-gateway').default>
+  ReturnType<typeof import('@/plugin/openclaw/composables/use-openclaw-gateway').useOpenClawGateway>
 >('openclaw-gateway')!
 
 /** 与 openclaw SkillStatusEntry 兼容（网关 skills.status 返回） */

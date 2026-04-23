@@ -49,7 +49,7 @@ function getFileName(filePath: string): string {
 export function createColumns(): ColumnDef<StackListResponse>[] {
   const { t } = useI18n()
   return [
-    { ...SelectColumn, size: 48 },
+    { ...(SelectColumn as ColumnDef<StackListResponse>), size: 48 },
     {
       accessorKey: 'name',
       header: ({ column }) =>

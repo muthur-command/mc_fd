@@ -1,4 +1,4 @@
-import { requestClient } from '@/services/request'
+import { download, requestClient, upload } from '@/services/request'
 
 // ==================== 类型定义 ====================
 
@@ -232,14 +232,14 @@ export interface DiskUsageResponse {
 const DOCKER_LIST_TIMEOUT = 15_000
 
 export async function getContainerListApi(all = false) {
-  return await requestClient.get<ContainerListResponse[]>(
+  return await requestClient.get<any, ContainerListResponse[]>(
     '/v1/docker/containers',
     { params: { all }, timeout: DOCKER_LIST_TIMEOUT },
   )
 }
 
 export async function getContainerDetailApi(containerId: string) {
-  return await requestClient.get<ContainerDetailResponse>(
+  return await requestClient.get<any, ContainerDetailResponse>(
     `/v1/docker/containers/${containerId}`,
   )
 }
@@ -305,7 +305,7 @@ export async function getContainerLogsApi(
   tail = 100,
   follow = false,
 ) {
-  return await requestClient.get<string>(
+  return await requestClient.get<any, string>(
     `/v1/docker/containers/${containerId}/logs`,
     { params: { tail, follow } },
   )
@@ -351,14 +351,14 @@ export async function disconnectContainerFromNetworkApi(
 // ==================== 镜像管理API ====================
 
 export async function getImageListApi(all = false) {
-  return await requestClient.get<ImageListResponse[]>('/v1/docker/images', {
+  return await requestClient.get<any, ImageListResponse[]>('/v1/docker/images', {
     params: { all },
     timeout: DOCKER_LIST_TIMEOUT,
   })
 }
 
 export async function getImageDetailApi(imageId: string) {
-  return await requestClient.get<ImageDetailResponse>(
+  return await requestClient.get<any, ImageDetailResponse>(
     `/v1/docker/images/${encodeURIComponent(imageId)}/detail`,
   )
 }
@@ -387,7 +387,7 @@ export async function buildImageFromUploadApi(
   tag: string,
   dockerfile: string = 'Dockerfile',
 ) {
-  return await (requestClient as any).upload<{ id: string, tags: string[] }>(
+  return await upload<{ id: string, tags: string[] }>(
     '/v1/docker/images/build/upload',
     { file },
     {
@@ -399,7 +399,7 @@ export async function buildImageFromUploadApi(
 
 export async function exportImageApi(imageId: string): Promise<Blob> {
   // 导出镜像可能需要较长时间，设置超时时间为 5 分钟（300000 毫秒）
-  return await (requestClient as any).download<Blob>(
+  return await download(
     `/v1/docker/images/${imageId}/export`,
     {
       timeout: 300_000, // 5 分钟
@@ -409,7 +409,7 @@ export async function exportImageApi(imageId: string): Promise<Blob> {
 
 export async function importImageApi(file: File) {
   // 导入镜像可能需要较长时间，设置超时时间为 10 分钟（600000 毫秒）
-  return await (requestClient as any).upload<{ id: string, tags: string[] }>(
+  return await upload<{ id: string, tags: string[] }>(
     '/v1/docker/images/import',
     { file },
     {
@@ -421,7 +421,7 @@ export async function importImageApi(file: File) {
 // ==================== 镜像源管理API ====================
 
 export async function getRegistryListApi() {
-  return await requestClient.get<RegistrySourceResponse[]>(
+  return await requestClient.get<any, RegistrySourceResponse[]>(
     '/v1/docker/registries',
   )
 }
@@ -447,7 +447,7 @@ export async function deleteRegistryApi(registryId: string) {
 // ==================== 堆栈管理API ====================
 
 export async function getStackListApi() {
-  return await requestClient.get<StackListResponse[]>('/v1/docker/stacks', {
+  return await requestClient.get<any, StackListResponse[]>('/v1/docker/stacks', {
     timeout: DOCKER_LIST_TIMEOUT,
   })
 }
@@ -475,7 +475,7 @@ export async function getStackServicesApi(projectName: string) {
 // ==================== 网络管理API ====================
 
 export async function getNetworkListApi() {
-  return await requestClient.get<NetworkListResponse[]>(
+  return await requestClient.get<any, NetworkListResponse[]>(
     '/v1/docker/networks',
     { timeout: DOCKER_LIST_TIMEOUT },
   )
@@ -492,7 +492,7 @@ export async function removeNetworkApi(networkId: string) {
 // ==================== 卷管理API ====================
 
 export async function getVolumeListApi() {
-  return await requestClient.get<VolumeListResponse[]>(
+  return await requestClient.get<any, VolumeListResponse[]>(
     '/v1/docker/volumes',
     { timeout: DOCKER_LIST_TIMEOUT },
   )
@@ -503,7 +503,7 @@ export async function createVolumeApi(data: CreateVolumeParam) {
 }
 
 export async function getVolumeDetailApi(volumeName: string) {
-  return await requestClient.get<VolumeDetailResponse>(
+  return await requestClient.get<any, VolumeDetailResponse>(
     `/v1/docker/volumes/${volumeName}`,
   )
 }
@@ -515,14 +515,14 @@ export async function removeVolumeApi(volumeName: string) {
 // ==================== 系统信息API ====================
 
 export async function getSystemInfoApi() {
-  return await requestClient.get<SystemInfoResponse>(
+  return await requestClient.get<any, SystemInfoResponse>(
     '/v1/docker/system/info',
     { timeout: DOCKER_LIST_TIMEOUT },
   )
 }
 
 export async function getDiskUsageApi() {
-  return await requestClient.get<DiskUsageResponse>('/v1/docker/system/df', {
+  return await requestClient.get<any, DiskUsageResponse>('/v1/docker/system/df', {
     timeout: DOCKER_LIST_TIMEOUT,
   })
 }
@@ -536,14 +536,14 @@ export interface SetConnectedStatusParam {
 }
 
 export async function getConnectedStatusApi() {
-  return await requestClient.get<ConnectedStatusResponse>(
+  return await requestClient.get<any, ConnectedStatusResponse>(
     '/v1/docker/system/connected',
     { timeout: DOCKER_LIST_TIMEOUT },
   )
 }
 
 export async function setConnectedStatusApi(param: SetConnectedStatusParam) {
-  return await requestClient.post<{ message: string }>(
+  return await requestClient.post<any, { message: string }>(
     '/v1/docker/system/connected',
     param,
   )

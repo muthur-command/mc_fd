@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { MdiGithub, MdiGoogle } from '@vben/icons'
-import { $t } from '@vben/locales'
+import { Icon } from '@iconify/vue'
+import { useI18n } from 'vue-i18n'
+
 import {
   getOAuth2Github,
   getOAuth2Google,
   getOAuth2LinuxDo,
-} from '#/plugins/oauth2/api'
+} from '@/plugin/oauth2/api'
 
 defineOptions({ name: 'OAuth2Login' })
+
+const { t } = useI18n()
 
 interface OAuth2Source {
   source: 'Github' | 'Google' | 'LinuxDo'
@@ -42,24 +45,20 @@ async function OAuth2(oa: OAuth2Source) {
     <div class="mt-4 flex items-center justify-between">
       <span class="border-input w-[35%] border-b dark:border-gray-600" />
       <span class="text-muted-foreground text-center text-xs uppercase">
-        {{ $t('authentication.thirdPartyLogin') }}
+        {{ t('auth.thirdPartySeparator') }}
       </span>
       <span class="border-input w-[35%] border-b dark:border-gray-600" />
     </div>
-    <div class="mt-5 flex flex-wrap justify-center">
-      <a-button class="mb-3" type="ghost" @click="OAuth2({ source: 'Github' })">
-        <MdiGithub class="size-6" />
-      </a-button>
-      <a-button class="mb-3" type="ghost" @click="OAuth2({ source: 'Google' })">
-        <MdiGoogle class="size-6" />
-      </a-button>
-      <a-button
-        class="mb-3"
-        type="ghost"
-        @click="OAuth2({ source: 'LinuxDo' })"
-      >
-        <img src="https://linux.do/logo-24.svg">
-      </a-button>
+    <div class="mt-5 flex flex-wrap justify-center gap-2">
+      <UiButton variant="outline" class="mb-3" @click="OAuth2({ source: 'Github' })">
+        <Icon icon="simple-icons:github" class="size-6" />
+      </UiButton>
+      <UiButton variant="outline" class="mb-3" @click="OAuth2({ source: 'Google' })">
+        <Icon icon="simple-icons:google" class="size-6" />
+      </UiButton>
+      <UiButton variant="outline" class="mb-3" @click="OAuth2({ source: 'LinuxDo' })">
+        <img src="https://linux.do/logo-24.svg" alt="Linux.do">
+      </UiButton>
     </div>
   </div>
 </template>

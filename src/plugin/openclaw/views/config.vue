@@ -418,7 +418,9 @@ const visibleTabs = computed((): VisibleSectionTab[] => {
 function sectionTabLabel(tab: VisibleSectionTab): string {
   if ('labelKey' in tab && typeof tab.labelKey === 'string')
     return t(tab.labelKey)
-  return tab.label
+  if ('label' in tab && typeof tab.label === 'string')
+    return tab.label
+  return ''
 }
 
 const activeSectionTitle = computed(() => {
@@ -10372,7 +10374,7 @@ watch(
                       :model-value="row"
                       class="h-9 min-w-0 flex-1 font-mono text-sm"
                       :placeholder="t('openclaw.configHooksAllowedAgentIdPlaceholder')"
-                      @update:model-value="(v: string) => updateHooksAllowedAgentIdRow(i, v)"
+                      @update:model-value="(v: string | number) => updateHooksAllowedAgentIdRow(i, String(v))"
                       @blur="applyHooksAllowedAgentIdsFromRows"
                     />
                     <UiButton variant="outline" size="sm" type="button" @click="removeHooksAllowedAgentIdRow(i)">
@@ -11388,7 +11390,7 @@ watch(
                       :model-value="row"
                       class="h-9 min-w-0 flex-1 font-mono text-sm"
                       :placeholder="t('openclaw.configPluginsPluginIdPlaceholder')"
-                      @update:model-value="(v: string) => updatePluginsAllowRow(i, v)"
+                      @update:model-value="(v: string | number) => updatePluginsAllowRow(i, String(v))"
                       @blur="applyPluginsAllowFromRows"
                     />
                     <UiButton variant="outline" size="sm" type="button" @click="removePluginsAllowRow(i)">
@@ -11424,7 +11426,7 @@ watch(
                       :model-value="row"
                       class="h-9 min-w-0 flex-1 font-mono text-sm"
                       :placeholder="t('openclaw.configPluginsPluginIdPlaceholder')"
-                      @update:model-value="(v: string) => updatePluginsDenyRow(i, v)"
+                      @update:model-value="(v: string | number) => updatePluginsDenyRow(i, String(v))"
                       @blur="applyPluginsDenyFromRows"
                     />
                     <UiButton variant="outline" size="sm" type="button" @click="removePluginsDenyRow(i)">
@@ -11979,7 +11981,7 @@ watch(
                       :model-value="row"
                       class="h-9 min-w-0 flex-1 font-mono text-sm"
                       :placeholder="t('openclaw.configGatewayToolNamePlaceholder')"
-                      @update:model-value="(v: string) => updateGatewayToolsAllowRow(i, v)"
+                      @update:model-value="(v: string | number) => updateGatewayToolsAllowRow(i, String(v))"
                       @blur="applyGatewayToolsAllowFromRows"
                     />
                     <UiButton variant="outline" size="sm" type="button" @click="removeGatewayToolsAllowRow(i)">
@@ -12017,7 +12019,7 @@ watch(
                       :model-value="row"
                       class="h-9 min-w-0 flex-1 font-mono text-sm"
                       :placeholder="t('openclaw.configGatewayToolNamePlaceholder')"
-                      @update:model-value="(v: string) => updateGatewayToolsDenyRow(i, v)"
+                      @update:model-value="(v: string | number) => updateGatewayToolsDenyRow(i, String(v))"
                       @blur="applyGatewayToolsDenyFromRows"
                     />
                     <UiButton variant="outline" size="sm" type="button" @click="removeGatewayToolsDenyRow(i)">
@@ -12316,7 +12318,7 @@ watch(
 
               <!-- Communication / Appearance / … 子路由：首项为 OpenClaw 同款根 Tab（key null），其余为 includeSections -->
               <div
-                v-else-if="settingsSubPage !== 'main' && draftConfig"
+                v-else-if="draftConfig"
                 class="config-satellite-section space-y-8"
               >
                 <!-- Infrastructure → Browser：放在卫星容器内 v-if，避免长 v-else-if 链偶发未命中时误显示「未实现」提示 -->

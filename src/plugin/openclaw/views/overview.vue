@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { RouteLocationRaw } from 'vue-router'
+
 /**
  * 概览页：与 Control UI Overview 布局与参数位置完全一致
  * 页头(Overview / Status, entry points, health)、Gateway Access 卡、Snapshot 卡、统计卡片、注意事项、日志入口
@@ -137,7 +139,7 @@ async function loadOverview() {
       gateway.request<{ totals?: { totalCost?: number, totalTokens?: number }, aggregates?: { messages?: { total?: number } } }>(RPC.sessionsUsage).catch(() => null),
       gateway.request<{ skills?: Array<{ name?: string, id?: string, disabled?: boolean, blockedByAllowlist?: boolean, missingDependencies?: string[] }> }>(RPC.skillsStatus).catch(() => null),
       gateway.request<{ jobs?: Array<{ state?: { lastStatus?: string } }> }>(RPC.cronList).catch(() => ({ jobs: [] })),
-      gateway.request<{ lines?: string[], log?: string }>(RPC.logsTail, { limit: 500 }).catch(() => ({ lines: [] })),
+      gateway.request<{ lines?: string[], log?: string }>(RPC.logsTail, { limit: 500 }).catch((): { lines: string[], log?: string } => ({ lines: [] })),
     ])
     sessionsCount.value = sessions && typeof sessions === 'object' && 'count' in sessions ? (sessions as { count?: number }).count ?? null : null
     cronEnabled.value = cronStatus?.enabled ?? null
@@ -169,11 +171,12 @@ function onRefresh() {
   loadOverview()
 }
 
-function setWsUrl(v: string) {
+function setWsUrl(v: string | number) {
+  const s = String(v)
   const c = config.config.value
   const prevUrl = (c?.wsUrl ?? '').trim()
-  const nextUrl = v.trim()
-  config.setConfig(c ? { ...c, baseUrl: nextUrl.replace(/^ws/, 'http').replace(/\/$/, ''), wsUrl: v } : { baseUrl: '', wsUrl: v })
+  const nextUrl = s.trim()
+  config.setConfig(c ? { ...c, baseUrl: nextUrl.replace(/^ws/, 'http').replace(/\/$/, ''), wsUrl: s } : { baseUrl: '', wsUrl: s })
   if (nextUrl !== prevUrl)
     auth.setToken('')
 }
@@ -549,7 +552,7 @@ watch(() => gateway?.connected, (connected) => {
             <RouterLink
               v-for="item in logQuickLinks"
               :key="item.titleKey"
-              :to="{ name: 'PluginOpenclawLogs' }"
+              :to="{ name: 'PluginOpenclawLogs' } as unknown as RouteLocationRaw"
               class="bg-muted/30 hover:bg-muted text-foreground flex items-center gap-3 rounded-lg border p-4 no-underline transition-colors"
             >
               <component :is="item.icon" class="size-5 shrink-0 text-muted-foreground" aria-hidden="true" />

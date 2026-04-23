@@ -1,4 +1,4 @@
-import { requestClient } from '#/api/request'
+import { requestClient } from '@/services/request'
 
 export interface OAuth2BindingResult {
   id: number
@@ -12,23 +12,23 @@ export interface OAuth2BindingParams {
 }
 
 export async function getOAuth2Github() {
-  return requestClient.get<string>('/api/v1/oauth2/github')
+  return requestClient.get<any, string>('/api/v1/oauth2/github')
 }
 
 export async function getOAuth2Google() {
-  return requestClient.get<string>('/api/v1/oauth2/google')
+  return requestClient.get<any, string>('/api/v1/oauth2/google')
 }
 
 export async function getOAuth2LinuxDo() {
-  return requestClient.get<string>('/api/v1/oauth2/linux-do')
+  return requestClient.get<any, string>('/api/v1/oauth2/linux-do')
 }
 
 export async function getOAuth2Bindings() {
-  return requestClient.get<string[]>('/api/v1/oauth2/me/bindings')
+  return requestClient.get<any, string[]>('/api/v1/oauth2/me/bindings')
 }
 
 export async function getOAuth2BindingAuthUrl(params: OAuth2BindingParams) {
-  return requestClient.get<string>('/api/v1/oauth2/me/binding', { params })
+  return requestClient.get<any, string>('/api/v1/oauth2/me/binding', { params })
 }
 
 export async function deleteOAuth2Binding(params: OAuth2BindingParams) {

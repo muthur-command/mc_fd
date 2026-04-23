@@ -1,4 +1,4 @@
-import { requestClient } from '#/api/request'
+import { requestClient } from '@/services/request'
 
 export interface emailCaptchaParams {
   recipients: string

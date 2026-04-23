@@ -46,7 +46,7 @@ async function fetchList() {
       ...filters.value,
     })
     const rawItems = res.items ?? []
-    list.value = rawItems.map((item: Record<string, unknown>) => normalizeUserItem(item))
+    list.value = rawItems.map(item => normalizeUserItem(item as unknown as Record<string, unknown>))
     total.value = res.total ?? 0
   }
   finally {

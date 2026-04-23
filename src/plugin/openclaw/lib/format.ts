@@ -3,13 +3,13 @@
  */
 
 export function formatMs(ms?: number | null): string {
-  if (ms == null && ms !== 0)
+  if (ms == null)
     return 'n/a'
   return new Date(ms).toLocaleString()
 }
 
 export function formatAgo(ms?: number | null): string {
-  if (ms == null && ms !== 0)
+  if (ms == null)
     return 'n/a'
   const diff = Date.now() - ms
   if (diff < 0)
@@ -30,7 +30,7 @@ export function formatAgo(ms?: number | null): string {
 }
 
 export function formatDurationMs(ms?: number | null): string {
-  if (ms == null && ms !== 0)
+  if (ms == null)
     return 'n/a'
   if (ms < 1000)
     return `${ms}ms`
@@ -55,7 +55,7 @@ export function formatNextRun(ms?: number | null): string {
 
 /** Format token count for display (Control UI usage style). */
 export function formatTokens(n?: number | null): string {
-  if (n == null && n !== 0)
+  if (n == null)
     return '0'
   const v = Number(n)
   if (v >= 1_000_000)
@@ -83,7 +83,7 @@ export function formatBytes(bytes?: number | null): string {
 }
 
 export function formatCost(n?: number | null, decimals = 2): string {
-  if (n == null && n !== 0)
+  if (n == null)
     return '0'
   const v = Number(n)
   if (v === 0)

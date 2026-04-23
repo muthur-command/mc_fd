@@ -116,24 +116,26 @@ export function useOpenClawAuth(wsUrlRef?: Ref<string>) {
     loadStored()
   }
 
-  function setToken(value: string) {
-    token.value = value
+  function setToken(value: string | number) {
+    token.value = String(value)
     const url = wsUrlRef?.value?.trim() ?? ''
     if (url)
-      persistSessionToken(url, value)
+      persistSessionToken(url, String(value))
   }
 
-  function setPassword(value: string) {
-    password.value = value
+  function setPassword(value: string | number) {
+    password.value = String(value)
     // 不写入任何存储（Control UI: "Password (not stored)"）
   }
 
-  function setSessionKey(value: string) {
-    sessionKey.value = value
+  function setSessionKey(value: string | number) {
+    const s = String(value)
+    sessionKey.value = s
     try {
-      if (value)
-        localStorage.setItem(STORAGE_KEY_SESSION_KEY, value)
-      else localStorage.removeItem(STORAGE_KEY_SESSION_KEY)
+      if (s)
+        localStorage.setItem(STORAGE_KEY_SESSION_KEY, s)
+      else
+        localStorage.removeItem(STORAGE_KEY_SESSION_KEY)
     }
     catch {
       // ignore

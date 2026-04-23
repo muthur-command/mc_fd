@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n'
 import { RPC } from '@/plugin/openclaw/lib/rpc-methods'
 
 const { t } = useI18n()
-const gateway = inject<ReturnType<import('@/plugin/openclaw/composables/use-openclaw-gateway').default>>('openclaw-gateway')!
+const gateway = inject<ReturnType<typeof import('@/plugin/openclaw/composables/use-openclaw-gateway').useOpenClawGateway>>('openclaw-gateway')!
 const logLines = ref<string[]>([])
 const loading = ref(false)
 

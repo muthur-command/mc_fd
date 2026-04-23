@@ -20,7 +20,7 @@ const props = defineProps<Props>()
 const { t } = useI18n()
 const nameFilter = ref('')
 
-watch(nameFilter, (v) => {
+watch(nameFilter, (v: string) => {
   props.table.getColumn('name')?.setFilterValue(v || undefined)
 }, { immediate: true })
 

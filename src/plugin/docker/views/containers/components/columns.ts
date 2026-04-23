@@ -65,7 +65,7 @@ function formatCreated(created: null | string): string {
 export function createColumns(ctx: ContainerColumnsContext): ColumnDef<ContainerListResponse>[] {
   const { t } = useI18n()
   return [
-    { ...SelectColumn, size: 48 },
+    { ...(SelectColumn as ColumnDef<ContainerListResponse>), size: 48 },
     {
       accessorKey: 'name',
       header: ({ column }) =>

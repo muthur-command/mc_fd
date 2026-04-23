@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { RouteLocationRaw } from 'vue-router'
+
 import { Database, MessagesSquare, MoreHorizontal, RefreshCw } from 'lucide-vue-next'
 /**
  * Sessions：对齐 openclaw Control UI sessions.ts + sessions controller
@@ -432,7 +434,7 @@ watch(pageSize, () => {
                     <div class="font-mono text-xs break-all">
                       <RouterLink
                         v-if="row.kind !== 'global'"
-                        :to="{ name: 'PluginOpenclawChat', query: { session: row.key } }"
+                        :to="{ name: 'PluginOpenclawChat', query: { session: row.key } } as unknown as RouteLocationRaw"
                         class="text-primary hover:underline"
                       >
                         {{ row.key }}
@@ -563,7 +565,7 @@ watch(pageSize, () => {
                       <UiDropdownMenuContent align="end" class="w-44">
                         <UiDropdownMenuItem v-if="row.kind !== 'global'" as-child>
                           <RouterLink
-                            :to="{ name: 'PluginOpenclawChat', query: { session: row.key } }"
+                            :to="{ name: 'PluginOpenclawChat', query: { session: row.key } } as unknown as RouteLocationRaw"
                             class="w-full cursor-pointer"
                           >
                             {{ t('openclaw.sessionsOpenChat') }}

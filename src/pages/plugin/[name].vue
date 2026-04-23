@@ -4,7 +4,11 @@
  * 侧栏「Card」等菜单点击后直接跳转到此处，无需为每个插件新建页面文件
  */
 const route = useRoute()
-const name = computed(() => (route.params.name as string) ?? '')
+const name = computed(() => {
+  const p = route.params as Record<string, string | string[] | undefined>
+  const raw = p.name
+  return Array.isArray(raw) ? (raw[0] ?? '') : (raw ?? '')
+})
 
 const pluginViewLoaders = import.meta.glob<{ default: import('vue').Component }>('/src/plugin/*/views/index.vue')
 const PluginView = shallowRef<import('vue').Component | null>(null)
