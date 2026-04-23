@@ -1,0 +1,13 @@
+.git
+.github
+node_modules
+dist
+.vscode
+.idea
+coverage
+*.log
+.husky
+.eslintcache
+**/.DS_Store
+stats.html
+pnpm-debug.log*

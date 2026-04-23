@@ -1,0 +1,19 @@
+# Paths that should trigger a full frontend check (lint + build).
+core:
+  - "src/**"
+  - "public/**"
+  - "index.html"
+  - "package.json"
+  - "pnpm-lock.yaml"
+  - "vite.config.*"
+  - "tsconfig*.json"
+  - "eslint.config.*"
+  - "components.json"
+  - "tailwind.config.*"
+  - "postcss.config.*"
+  - ".github/**"
+
+# Lockfile / manifest changes (dependency-review gate).
+requirements:
+  - "package.json"
+  - "pnpm-lock.yaml"

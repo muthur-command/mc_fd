@@ -1,0 +1,157 @@
+name: Build images
+
+# yamllint disable-line rule:truthy
+on:
+  workflow_dispatch:
+  release:
+    types: ["published"]
+  schedule:
+    - cron: "0 2 * * *"
+
+env:
+  ARCHITECTURES: '["amd64", "aarch64"]'
+  BUILD_TYPE: mc_fd
+  IMAGE_NAME: muthurcommand-fd
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  init:
+    name: Initialize build
+    if: github.repository_owner == 'muthur-command'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      channel: ${{ steps.version.outputs.channel }}
+      publish: ${{ steps.version.outputs.publish }}
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.13"
+
+      - name: Get version
+        id: version
+        uses: muthur-command/actions/helpers/version@mc # zizmor: ignore[unpinned-uses]
+        with:
+          type: ${{ env.BUILD_TYPE }}
+
+      - name: Verify version
+        if: github.event_name == 'release'
+        uses: muthur-command/actions/helpers/verify-version@mc # zizmor: ignore[unpinned-uses]
+        with:
+          ignore-dev: true
+
+      - name: Get build matrix
+        id: matrix
+        uses: muthur-command/builder/actions/prepare-multi-arch-matrix@2026.04.2
+        with:
+          architectures: ${{ env.ARCHITECTURES }}
+          image-name: ${{ env.IMAGE_NAME }}
+
+  build:
+    name: Build ${{ matrix.arch }} image
+    if: github.repository_owner == 'muthur-command'
+    needs: init
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.init.outputs.matrix) }}
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Build image
+        uses: muthur-command/builder/actions/build-image@2026.04.2
+        with:
+          arch: ${{ matrix.arch }}
+          cache-gha: false
+          container-registry-password: ${{ secrets.GITHUB_TOKEN }}
+          cosign-identity: "https://github.com/muthur-command/mc_fd/.*"
+          image: ${{ matrix.image }}
+          image-tags: |
+            ${{ needs.init.outputs.version }}
+            latest
+          push: ${{ needs.init.outputs.publish == 'true' }}
+          version: ${{ needs.init.outputs.version }}
+
+  manifest:
+    name: Publish multi-arch manifest
+    needs: [init, build]
+    if: >-
+      github.repository_owner == 'muthur-command'
+      && needs.init.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      packages: write
+    steps:
+      - name: Publish multi-arch manifest
+        uses: muthur-command/builder/actions/publish-multi-arch-manifest@2026.04.2
+        with:
+          architectures: ${{ env.ARCHITECTURES }}
+          container-registry-password: ${{ secrets.GITHUB_TOKEN }}
+          image-name: ${{ env.IMAGE_NAME }}
+          image-tags: |
+            ${{ needs.init.outputs.version }}
+            latest
+
+  publish_version:
+    name: Publish version files
+    environment: ${{ needs.init.outputs.channel }}
+    if: >-
+      github.repository_owner == 'muthur-command'
+      && needs.init.outputs.publish == 'true'
+    needs: [init, build, manifest]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Initialize git
+        uses: muthur-command/actions/helpers/git-init@mc # zizmor: ignore[unpinned-uses]
+        with:
+          name: ${{ secrets.GIT_NAME }}
+          email: ${{ secrets.GIT_EMAIL }}
+          token: ${{ secrets.GIT_TOKEN }}
+
+      - name: Update version file
+        uses: muthur-command/actions/helpers/version-push@mc # zizmor: ignore[unpinned-uses]
+        with:
+          key: "mc_fd"
+          key-description: "Muthur Command mc_fd"
+          version: ${{ needs.init.outputs.version }}
+          channel: ${{ needs.init.outputs.channel }}
+          exclude-list: "[]"
+
+      - name: Update version file (stable -> beta)
+        if: needs.init.outputs.channel == 'stable'
+        uses: muthur-command/actions/helpers/version-push@mc # zizmor: ignore[unpinned-uses]
+        with:
+          key: "mc_fd"
+          key-description: "Muthur Command mc_fd"
+          version: ${{ needs.init.outputs.version }}
+          channel: beta
+          exclude-list: "[]"
