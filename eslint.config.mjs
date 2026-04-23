@@ -14,6 +14,8 @@ export default antfu({
   ignores: [
     '**/build/**',
     '**/components/ui/**',
+    // GitHub Actions / Dependabot YAML uses double quotes & flow style; yaml/* rules are for app config only.
+    '.github/**',
   ],
   settings: {
     'import/core-modules': ['vue-router/auto-routes'],
