@@ -1,5 +1,8 @@
 version: 2
 updates:
+  # 若需在 PR 中自动升级 muthur-command 私有 action，请在组织 Settings → Code security →
+  # Dependabot →「Grant access」中为 actions/builder 等仓库授权；否则保持下方 ignore，避免
+  # update_files 因无法拉取私有元数据而退出码 1。
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -9,5 +12,8 @@ updates:
     labels:
       - dependency
       - github_actions
+    ignore:
+      - dependency-name: "muthur-command/actions"
+      - dependency-name: "muthur-command/builder"
     cooldown:
       default-days: 7
