@@ -8,6 +8,8 @@ on:
   schedule:
     - cron: "0 2 * * *"
 
+# 触发：workflow_dispatch / release(published) / 定时。在 github.repository_owner == muthur-command 时，
+# 各架构镜像与多架构 manifest 推送到 ghcr.io/muthur-command/（与 prepare-multi-arch-matrix 默认 registry-prefix 一致）。
 env:
   ARCHITECTURES: '["amd64", "aarch64"]'
   BUILD_TYPE: mc_fd
@@ -90,15 +92,13 @@ jobs:
           image-tags: |
             ${{ needs.init.outputs.version }}
             latest
-          push: ${{ needs.init.outputs.publish == 'true' }}
+          push: true
           version: ${{ needs.init.outputs.version }}
 
   manifest:
     name: Publish multi-arch manifest
     needs: [init, build]
-    if: >-
-      github.repository_owner == 'muthur-command'
-      && needs.init.outputs.publish == 'true'
+    if: github.repository_owner == 'muthur-command'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -117,9 +117,7 @@ jobs:
   publish_version:
     name: Publish version files
     environment: ${{ needs.init.outputs.channel }}
-    if: >-
-      github.repository_owner == 'muthur-command'
-      && needs.init.outputs.publish == 'true'
+    if: github.repository_owner == 'muthur-command'
     needs: [init, build, manifest]
     runs-on: ubuntu-latest
     permissions:
