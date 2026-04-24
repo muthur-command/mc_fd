@@ -116,7 +116,8 @@ jobs:
 
   publish_version:
     name: Publish version files
-    environment: ${{ needs.init.outputs.channel }}
+    # channel 为空时 version-push 会拼成 /tmp/version/.json；与 version helper 未识别 type 时对齐，默认 dev
+    environment: ${{ needs.init.outputs.channel || 'dev' }}
     if: github.repository_owner == 'muthur-command'
     needs: [init, build, manifest]
     runs-on: ubuntu-latest
@@ -141,7 +142,7 @@ jobs:
           key: "mc_fd"
           key-description: "Muthur Command mc_fd"
           version: ${{ needs.init.outputs.version }}
-          channel: ${{ needs.init.outputs.channel }}
+          channel: ${{ needs.init.outputs.channel || 'dev' }}
           exclude-list: "[]"
 
       - name: Update version file (stable -> beta)
