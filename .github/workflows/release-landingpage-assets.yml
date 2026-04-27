@@ -1,0 +1,77 @@
+name: Release landingpage assets
+
+# yamllint disable-line rule:truthy
+on:
+  release:
+    types: ["published"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to upload asset to (required for manual run)"
+        required: true
+        type: string
+
+env:
+  NODE_VERSION: "20"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-upload:
+    name: Build landing asset and upload to release
+    if: github.repository_owner == 'muthur-command'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out code from GitHub
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Resolve target tag
+        id: resolve_tag
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            tag="${{ github.event.release.tag_name }}"
+          else
+            tag="${{ inputs.tag }}"
+          fi
+          if [[ -z "${tag}" ]]; then
+            echo "Target tag is empty."
+            exit 1
+          fi
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Build frontend
+        run: pnpm build
+
+      - name: Create landingpage release archive
+        id: package
+        run: |
+          set -euo pipefail
+          asset_name="muthur_command_frontend_landingpage-${{ steps.resolve_tag.outputs.tag }}.tar.gz"
+          tar -C dist -czf "${asset_name}" .
+          echo "asset_name=${asset_name}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release upload "${{ steps.resolve_tag.outputs.tag }}" "${{ steps.package.outputs.asset_name }}" --repo "${{ github.repository }}" --clobber
