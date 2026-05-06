@@ -18,6 +18,10 @@ RUN --mount=type=cache,target=/root/.local/share/pnpm/store \
     pnpm build
 
 FROM nginx:1.27-alpine AS runtime
+LABEL \
+    io.mcio.type="mc_fd" \
+    org.opencontainers.image.title="Muthur Command Frontend (nginx)" \
+    org.opencontainers.image.description="Static SPA served by nginx for Muthur Command"
 COPY scripts/deploy/nginx.docker.conf /etc/nginx/nginx.conf
 COPY --from=build /mc_fd/dist /var/www/mc_fd
 
