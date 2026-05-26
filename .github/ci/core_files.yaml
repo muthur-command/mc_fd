@@ -11,6 +11,7 @@ core:
   - "components.json"
   - "tailwind.config.*"
   - "postcss.config.*"
+  - "landingpage/**"
   - ".github/**"
 
 # Lockfile / manifest changes (dependency-review gate).

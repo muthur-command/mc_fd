@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+
 import InstallCard from '@/components/InstallCard.vue'
 import SocialSection from '@/components/SocialSection.vue'
 import TopBar from '@/components/TopBar.vue'

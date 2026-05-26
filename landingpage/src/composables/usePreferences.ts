@@ -1,13 +1,17 @@
-import { onMounted, onUnmounted, ref, watch } from 'vue'
 import type { Ref } from 'vue'
+
+import { onMounted, onUnmounted, ref, watch } from 'vue'
+
+import type { LandingLocale, ThemePreference } from '@/constants'
+
 import {
-  HTML_LANG,
-  LOCALE_STORAGE_KEY,
-  THEME_STORAGE_KEY,
   detectThemePreference,
+  HTML_LANG,
+
+  LOCALE_STORAGE_KEY,
   resolveColorTheme,
-  type LandingLocale,
-  type ThemePreference,
+  THEME_STORAGE_KEY,
+
 } from '@/constants'
 import { i18n } from '@/i18n'
 

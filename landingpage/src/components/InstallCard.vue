@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+
 import { useInstallStatus } from '@/composables/useInstallStatus'
 
 const { t } = useI18n()

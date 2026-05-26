@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+
+import type { LandingLocale, ThemePreference } from '@/constants'
+
 import DropdownMenu from '@/components/DropdownMenu.vue'
-import { LOCALE_LABELS, LOCALE_ORDER, type LandingLocale, type ThemePreference } from '@/constants'
 import { useLocalePreference, useOutsideClick, useThemePreference } from '@/composables/usePreferences'
+import { LOCALE_LABELS, LOCALE_ORDER } from '@/constants'
 
 const { t } = useI18n()
 const { themePref, themeMenuOpen, setThemePref, themeLabel } = useThemePreference()

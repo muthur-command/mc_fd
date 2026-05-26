@@ -14,6 +14,8 @@ export default antfu({
   ignores: [
     '**/build/**',
     '**/components/ui/**',
+    'landingpage/dist/**',
+    'landingpage/node_modules/**',
     // GitHub Actions / Dependabot YAML uses double quotes & flow style; yaml/* rules are for app config only.
     '.github/**',
   ],

@@ -1,4 +1,5 @@
 import { createI18n } from 'vue-i18n'
+
 import { detectLocale } from '@/constants'
 import en from '@/i18n/en.json'
 import it from '@/i18n/it.json'
