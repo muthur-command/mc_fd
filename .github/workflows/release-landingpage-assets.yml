@@ -22,6 +22,9 @@ jobs:
     name: Build landing asset and upload to release
     if: github.repository_owner == 'muthur-command'
     runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: landingpage
     steps:
       - name: Check out code from GitHub
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -30,6 +33,7 @@ jobs:
 
       - name: Resolve target tag
         id: resolve_tag
+        working-directory: .
         run: |
           set -euo pipefail
           if [[ "${{ github.event_name }}" == "release" ]]; then
@@ -46,6 +50,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@0e279bb959325dab635dd2c09392533439d90093 # v6.0.8
         with:
+          version: 9.15.9
           run_install: false
 
       - name: Set up Node.js
@@ -53,23 +58,25 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          cache-dependency-path: landingpage/pnpm-lock.yaml
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
+        run: pnpm install --frozen-lockfile
 
-      - name: Build frontend
+      - name: Build landingpage frontend
         run: pnpm build
 
       - name: Create landingpage release archive
         id: package
+        working-directory: .
         run: |
           set -euo pipefail
           asset_name="muthur_command_frontend_landingpage-${{ steps.resolve_tag.outputs.tag }}.tar.gz"
-          tar -C dist -czf "${asset_name}" .
+          tar -C landingpage/dist -czf "${asset_name}" .
           echo "asset_name=${asset_name}" >> "$GITHUB_OUTPUT"
 
       - name: Upload release asset
+        working-directory: .
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
