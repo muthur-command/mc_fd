@@ -1,11 +1,8 @@
 version: 2
 updates:
-  # 若需在 PR 中自动升级 muthur-command 私有 action，请在组织 Settings → Code security →
-  # Dependabot →「Grant access」中为 actions/builder 等仓库授权；否则保持下方 ignore，避免
-  # update_files 因无法拉取私有元数据而退出码 1。
-  #
-  # 注意：workflow 里写的是 muthur-command/actions/helpers/* 等子路径，
-  # dependency-name 不能只用 muthur-command/actions，需用通配符覆盖全部私有 action。
+  # 私有 action（muthur-command/*）无 Dependabot 仓库授权时会 update_files 失败。
+  # ignore 通配符无法可靠匹配多级路径（dependabot-core#11263），故用 allow 白名单：
+  # 仅下列公共 action 参与版本更新；workflow 新增 action 时请同步追加。
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -15,7 +12,20 @@ updates:
     labels:
       - dependency
       - github_actions
-    ignore:
-      - dependency-name: "muthur-command/*"
+    allow:
+      - dependency-name: "actions/checkout"
+      - dependency-name: "actions/dependency-review-action"
+      - dependency-name: "actions/github-script"
+      - dependency-name: "actions/setup-node"
+      - dependency-name: "actions/setup-python"
+      - dependency-name: "actions/stale"
+      - dependency-name: "dorny/paths-filter"
+      - dependency-name: "github/codeql-action/analyze"
+      - dependency-name: "github/codeql-action/init"
+      - dependency-name: "hadolint/hadolint-action"
+      - dependency-name: "j178/prek-action"
+      - dependency-name: "pnpm/action-setup"
+      - dependency-name: "release-drafter/release-drafter"
+      - dependency-name: "rhysd/changelog-from-release/action"
     cooldown:
       default-days: 7
