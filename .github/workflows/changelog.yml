@@ -15,7 +15,7 @@ jobs:
         with:
           ref: mc_fd
 
-      - uses: rhysd/changelog-from-release/action@v3
+      - uses: rhysd/changelog-from-release/action@78b335bb7d059f35ad04c5428d50711726feee50 # v3
         with:
           file: CHANGELOG.md
           pull_request: true
