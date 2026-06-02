@@ -4,13 +4,13 @@ Vue 3 + Vite 单页应用，生产环境由 nginx 提供静态资源。MCOS 应�
 
 ## MCOS 集成契约
 
-| 项 | 值 |
-|----|-----|
-| 容器名 | `mcos_mc_fd`（`supervisor/const.py` `DOCKER_PREFIX`） |
-| HTTP 端口 | `80`（`MC_FRONTEND_PORT`） |
-| 镜像 | `ghcr.io/muthur-command/muthurcommand-fd`（见 `version` 仓 `images.mc_fd`） |
-| OCI 标签 | `io.mcos.type="mc_fd"` |
-| Ingress | MC 栈就绪后 Supervisor 代理 `/mc_fd/web/*` |
+| 项        | 值                                                                          |
+| --------- | --------------------------------------------------------------------------- |
+| 容器名    | `mcos_mc_fd`（`supervisor/const.py` `DOCKER_PREFIX`）                       |
+| HTTP 端口 | `80`（`MC_FRONTEND_PORT`）                                                  |
+| 镜像      | `ghcr.io/muthur-command/muthurcommand-fd`（见 `version` 仓 `images.mc_fd`） |
+| OCI 标签  | `io.mcos.type="mc_fd"`                                                      |
+| Ingress   | MC 栈就绪后 Supervisor 代理 `/mc_fd/web/*`                                  |
 
 首启引导页静态资源以 release 资产 `muthur_command_frontend_landingpage-*.tar.gz` 发布，供 `landingpage/update_frontend.yml` 拉取。
 

@@ -6,13 +6,13 @@ Vue 3 + Vite SPA served by nginx in production. MCOS application stack frontend,
 
 ## MCOS integration
 
-| Item | Value |
-|------|--------|
-| Container name | `mcos_mc_fd` (`supervisor/const.py` `DOCKER_PREFIX`) |
-| HTTP port | `80` (`MC_FRONTEND_PORT`) |
-| Image | `ghcr.io/muthur-command/muthurcommand-fd` (see `version` repo `images.mc_fd`) |
-| OCI label | `io.mcos.type="mc_fd"` |
-| Ingress | Supervisor proxies `/mc_fd/web/*` when MC stack is ready |
+| Item           | Value                                                                         |
+| -------------- | ----------------------------------------------------------------------------- |
+| Container name | `mcos_mc_fd` (`supervisor/const.py` `DOCKER_PREFIX`)                          |
+| HTTP port      | `80` (`MC_FRONTEND_PORT`)                                                     |
+| Image          | `ghcr.io/muthur-command/muthurcommand-fd` (see `version` repo `images.mc_fd`) |
+| OCI label      | `io.mcos.type="mc_fd"`                                                        |
+| Ingress        | Supervisor proxies `/mc_fd/web/*` when MC stack is ready                      |
 
 Landing page static assets for first-boot UI are published from this repo as `muthur_command_frontend_landingpage-*.tar.gz` release assets (consumed by `landingpage/update_frontend.yml`).
 
