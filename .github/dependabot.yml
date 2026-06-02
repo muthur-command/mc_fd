@@ -27,5 +27,7 @@ updates:
       - dependency-name: "pnpm/action-setup"
       - dependency-name: "release-drafter/release-drafter"
       - dependency-name: "rhysd/changelog-from-release/action"
+      - dependency-name: "muthur-command/builder"
+      - dependency-name: "muthur-command/builder/*"
     cooldown:
       default-days: 7
