@@ -29,5 +29,9 @@ updates:
       - dependency-name: "rhysd/changelog-from-release/action"
       - dependency-name: "muthur-command/builder"
       - dependency-name: "muthur-command/builder/*"
+    groups:
+      muthur-command-builder:
+        patterns:
+          - "muthur-command/builder*"
     cooldown:
       default-days: 7
