@@ -20,6 +20,7 @@ jobs:
         with:
           fetch-depth: 0
           fetch-tags: true
+          persist-credentials: true
 
       - name: Find Next Version
         id: version
@@ -62,6 +63,35 @@ jobs:
           echo "New target version: $version_tag (Release Drafter version: $semver)"
           echo "version=$version_tag" >> "$GITHUB_OUTPUT"
           echo "semver=$semver" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.13"
+
+      # Align package.json with the draft release tag before publish (verify-version).
+      - name: Sync version to draft release tag
+        id: sync_version
+        env:
+          TARGET_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          set -eo pipefail
+          current=$(python3 -c "import json; print(json.load(open('package.json'))['version'])")
+          if [[ "$current" == "$TARGET_VERSION" ]]; then
+            echo "package.json already at $TARGET_VERSION"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          python3 script/sync_version.py --set-version "$TARGET_VERSION"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json
+          git commit -m "Bump version to ${TARGET_VERSION}"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Push version sync commit
+        if: steps.sync_version.outputs.changed == 'true'
+        run: git push
 
       - name: Run Release Drafter
         uses: release-drafter/release-drafter@693d20e7c1ce1a81d3a41962f85914253b518449 # v7.3.1
