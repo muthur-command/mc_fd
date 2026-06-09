@@ -22,7 +22,11 @@ LABEL \
     io.mcos.type="mc_fd" \
     org.opencontainers.image.title="Muthur Command Frontend (nginx)" \
     org.opencontainers.image.description="Static SPA served by nginx for Muthur Command"
-COPY scripts/deploy/nginx.docker.conf /etc/nginx/nginx.conf
+ENV MC_BACKEND_HOST=mc_bd \
+    MC_BACKEND_PORT=8001
+COPY scripts/deploy/nginx.docker.conf.template /etc/nginx/nginx.conf.template
+COPY scripts/deploy/docker-entrypoint.d/40-render-nginx-conf.sh /docker-entrypoint.d/40-render-nginx-conf.sh
+RUN chmod +x /docker-entrypoint.d/40-render-nginx-conf.sh
 COPY --from=build /mc_fd/dist /var/www/mc_fd
 
 EXPOSE 80
