@@ -14,6 +14,12 @@ FROM deps AS build
 WORKDIR /mc_fd
 COPY . .
 
+# Vite bakes VITE_* into the client bundle at build time (not at container run).
+# Without these, env.ts validation fails and the SPA crashes to a blank page.
+ENV VITE_SERVER_API_URL= \
+    VITE_SERVER_API_PREFIX=/api \
+    VITE_SERVER_API_TIMEOUT=5000
+
 RUN --mount=type=cache,target=/root/.local/share/pnpm/store \
     pnpm build
 

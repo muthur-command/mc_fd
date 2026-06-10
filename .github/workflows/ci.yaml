@@ -210,6 +210,10 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Build
+        env:
+          VITE_SERVER_API_URL: ""
+          VITE_SERVER_API_PREFIX: /api
+          VITE_SERVER_API_TIMEOUT: "5000"
         run: pnpm build
 
   dependency-review:
