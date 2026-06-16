@@ -469,20 +469,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/logs/login/': RouteRecordInfo<
-      '/logs/login/',
-      '/logs/login',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/logs/opera/': RouteRecordInfo<
-      '/logs/opera/',
-      '/logs/opera',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/plugin/': RouteRecordInfo<
       '/plugin/',
       '/plugin',
@@ -950,18 +936,6 @@ declare module 'vue-router/auto-routes' {
     'src/pages/help-center.vue': {
       routes:
         | '/help-center'
-      views:
-        | never
-    }
-    'src/pages/logs/login/index.vue': {
-      routes:
-        | '/logs/login/'
-      views:
-        | never
-    }
-    'src/pages/logs/opera/index.vue': {
-      routes:
-        | '/logs/opera/'
       views:
         | never
     }
